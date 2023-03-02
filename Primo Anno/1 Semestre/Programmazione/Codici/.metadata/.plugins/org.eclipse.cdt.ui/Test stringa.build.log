@@ -1,0 +1,15 @@
+15:54:28 **** Incremental Build of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test stringa.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o "Test stringa.exe" "src\\Test stringa.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+
+15:54:28 Build Failed. 1 errors, 2 warnings. (took 434ms)
+

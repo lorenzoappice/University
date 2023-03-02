@@ -1,0 +1,154 @@
+15:53:25 **** Rebuild of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:15:8: warning: implicit declaration of function 'Separatore' [-Wimplicit-function-declaration]
+   if ((Separatore(s[i])==1) && (parolacompletata=1)) nparole=nparole+1;
+        ^~~~~~~~~~
+..\src\Test stringa.c:42:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test stringa.c:42:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o "Test stringa.exe" "src\\Test stringa.o" 
+src\Test stringa.o: In function `ContareParole':
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Test stringa\Debug/../src/Test stringa.c:15: undefined reference to `Separatore'
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Test stringa\Debug/../src/Test stringa.c:16: undefined reference to `Separatore'
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+
+15:53:26 Build Failed. 3 errors, 3 warnings. (took 920ms)
+
+15:53:58 **** Incremental Build of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:16:8: warning: implicit declaration of function 'Separatore' [-Wimplicit-function-declaration]
+   if ((Separatore(s[i])==1) && (parolacompletata=1)) nparole=nparole+1;
+        ^~~~~~~~~~
+..\src\Test stringa.c:43:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test stringa.c:43:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o "Test stringa.exe" "src\\Test stringa.o" 
+src\Test stringa.o: In function `ContareParole':
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Test stringa\Debug/../src/Test stringa.c:16: undefined reference to `Separatore'
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Test stringa\Debug/../src/Test stringa.c:17: undefined reference to `Separatore'
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+
+15:53:59 Build Failed. 3 errors, 3 warnings. (took 444ms)
+
+15:53:59 **** Rebuild of configuration Debug for project statistiche file ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\statistiche file.o" "..\\src\\statistiche file.c" 
+gcc -o "statistiche file.exe" "src\\statistiche file.o" 
+
+15:53:59 Build Finished. 0 errors, 0 warnings. (took 493ms)
+
+15:54:18 **** Incremental Build of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test stringa.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o "Test stringa.exe" "src\\Test stringa.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+
+15:54:19 Build Failed. 1 errors, 2 warnings. (took 486ms)
+
+Info: Nothing to build for statistiche file
+15:54:26 **** Incremental Build of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+..\src\Test stringa.c:66:2: error: expected declaration or statement at end of input
+  return EXIT_SUCCESS;
+  ^~~~~~
+At top level:
+..\src\Test stringa.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+ int main(void) {
+     ^~~~
+
+15:54:26 Build Failed. 1 errors, 2 warnings. (took 180ms)
+
+Info: Nothing to build for statistiche file
+15:54:28 **** Incremental Build of configuration Debug for project Test stringa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test stringa.o" "..\\src\\Test stringa.c" 
+..\src\Test stringa.c: In function 'ContareParole':
+..\src\Test stringa.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test stringa.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o "Test stringa.exe" "src\\Test stringa.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for statistiche file
+15:55:43 **** Rebuild of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test.o" "..\\src\\Test.c" 
+..\src\Test.c: In function 'ContareParole':
+..\src\Test.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+At top level:
+..\src\Test.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+gcc -o Test.exe "src\\Test.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for statistiche file
+15:56:09 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -o Test.exe "src\\Test.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for statistiche file
+15:56:10 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -o Test.exe "src\\Test.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for statistiche file
+15:56:11 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -o Test.exe "src\\Test.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for statistiche file
+15:56:32 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -o Test.exe "src\\Test.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
+15:56:55 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test.o" "..\\src\\Test.c" 
+..\src\Test.c: In function 'ContareParole':
+..\src\Test.c:59:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main(void) {
+     ^~~~
+..\src\Test.c:67:1: error: expected declaration or statement at end of input
+ }
+ ^
+At top level:
+..\src\Test.c:59:5: warning: 'main' defined but not used [-Wunused-function]
+ int main(void) {
+     ^~~~
+15:57:25 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test.o" "..\\src\\Test.c" 
+gcc -o Test.exe "src\\Test.o" 
+15:58:02 **** Incremental Build of configuration Debug for project Test ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Test.o" "..\\src\\Test.c" 
+gcc -o Test.exe "src\\Test.o" 

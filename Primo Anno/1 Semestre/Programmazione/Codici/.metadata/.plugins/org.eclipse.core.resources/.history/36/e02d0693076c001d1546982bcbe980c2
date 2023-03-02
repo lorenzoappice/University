@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* StampaValori(int vettore[],int n);
+int main(void) {
+	int N;
+	int K;
+	int Pos=0;
+	int Val=1;
+	int V[N];
+	printf("Indicami il valore di N: ");fflush(stdout);
+	scanf(" %d",&N);
+	printf("Indicami il valore di K: ");fflush(stdout);
+	scanf(" %d",&K);
+	while(Pos<N)
+	{
+		V[Pos]=Val*K;
+		Val=Val+1;
+		Pos=Pos+1;
+	}
+	StampaValori(V,N);
+
+	return EXIT_SUCCESS;
+}
+int* StampaValori(int vettore[],int n)
+{
+	int pos=0;
+	while(pos<n)
+	{
+		printf(" %d\n",vettore[pos]);
+		pos=pos+1;
+	}
+	return 0;
+}

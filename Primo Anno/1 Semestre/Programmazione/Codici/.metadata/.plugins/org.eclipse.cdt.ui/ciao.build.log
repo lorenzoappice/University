@@ -1,0 +1,8 @@
+10:18:01 **** Incremental Build of configuration Debug for project ciao ****
+Info: Internal Builder is used for build
+gcc -o ciao.exe "src\\ciao.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file ciao.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+
+10:18:01 Build Failed. 1 errors, 0 warnings. (took 157ms)
+

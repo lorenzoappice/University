@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+void inputfile(FILE *fp);
+void outputfile(FILE *fp);
+void counterwords(FILE *fp);
+
+int main(void) {
+	setbuf(stdin, NULL);
+	FILE *file_write, *file_read, *file_delete, *file_counter;
+	char scelta;
+	int casi=1;
+	do {
+		printf("\nIndicami la scelta che vuoi fare:\n");
+		printf("1- Inserisci nel file una stringa\n");
+		printf("2- Visualizza contenuto File\n");
+		printf("3- Cancellazione contenuto File\n");
+		printf("4- Conta parole File\n");
+		printf("0- Exit\n");
+		scanf(" %c", &scelta);
+		if(scelta =='1')
+		{
+			system("cls");
+			file_write = fopen("Es1.txt", "a+");
+			inputfile(file_write);
+			fclose(file_write);
+		}
+		else if (scelta == '2')
+		{
+			system("cls");
+			file_read = fopen("Es1.txt", "r");
+			outputfile(file_read);
+			fclose(file_read);
+		}
+		else if (scelta == '3')
+		{
+			system("cls");
+			file_delete= fopen("Es1.txt","w");
+			fclose(file_delete);
+		}
+		else if (scelta == '4')
+		{
+			system("cls");
+			file_counter= fopen("Es1.txt","r");
+			counterwords(file_counter);
+			fclose(file_counter);
+		}
+		else if (scelta == '0')
+		{
+			casi=0;
+		}
+		else
+		{
+			casi=0;
+		}
+	} while(casi != 0);
+	system("pause");
+	return EXIT_SUCCESS;
+}
+
+
+void inputfile(FILE *fp) {
+	char stringa[50];
+	printf("\n-----------------------------------------\n");
+	if (fp != NULL) {
+		printf("[+] File aperto con successo!\n");
+		printf("Indicami cosa vuoi inserire nel file:\n");
+		fflush(stdin);
+		scanf(" %50[^\n]",stringa);
+		fprintf(fp,"%s\n", stringa);
+		printf("[+] Scrittura effettuata!\n");
+	} else {
+		printf("[!] Errore durante l'apertura del file!");
+	}
+	printf("\n-----------------------------------------\n");
+	return;
+}
+void outputfile(FILE *fp) {
+	char stringa[50];
+	int flag = 0;
+	printf("\n-----------------------------------------\n");
+	if (fp !=NULL) {
+		printf("[+] File aperto con successo per la lettura!\n");
+		while(flag == 0) {
+			if (!feof(fp)) { flag = 1; }
+			fgets(stringa, 50, fp);
+			printf("%s",stringa);
+			fflush(stdout);
+		}
+	} else {
+		printf("[!] Errore durante l'apertura del file per la lettura!");
+	}
+	printf("\n-----------------------------------------\n");
+	return;
+}

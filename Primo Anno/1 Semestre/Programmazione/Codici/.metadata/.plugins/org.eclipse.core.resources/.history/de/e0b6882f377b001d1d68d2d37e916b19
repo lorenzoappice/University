@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <stdlib.h>
+void inputfile(FILE *fp);
+void outputfile(FILE *fp);
+void counterwords(FILE *fp);
+
+int main(void) {
+	setbuf(stdin, NULL);
+	FILE *file_write, *file_read, *file_delete, *file_counter;
+	char scelta;
+	int casi=1;
+	do {
+		printf("\nIndicami la scelta che vuoi fare:\n");
+		printf("1- Inserisci nel file una stringa.\n");
+		printf("2- Visualizza contenuto File.\n");
+		printf("3- Conta parole File.\n");
+		printf("4- Cancellazione contenuto File.\n");
+		printf("0- Exit\n");
+		scanf(" %c", &scelta);
+		if(scelta =='1')
+		{
+			system("cls");
+			file_write = fopen("C:/Users/appic/Desktop/UnibaAppunti/Programmazione/eclipse-workspace/Es1 file/Debug/Es1.txt", "a+");
+			inputfile(file_write);
+			fclose(file_write);
+		}
+		else if (scelta == '2')
+		{
+			system("cls");
+			file_read = fopen("C:/Users/appic/Desktop/UnibaAppunti/Programmazione/eclipse-workspace/Es1 file/Debug/Es1.txt", "r");
+			outputfile(file_read);
+			fclose(file_read);
+		}
+		else if (scelta == '3')
+		{
+			system("cls");
+			file_counter= fopen("C:/Users/appic/Desktop/UnibaAppunti/Programmazione/eclipse-workspace/Es1 file/Debug/Es1.txt","r");
+			counterwords(file_counter);
+			fclose(file_counter);
+		}
+		else if (scelta == '4')
+		{
+			system("cls");
+			file_delete= fopen("C:/Users/appic/Desktop/UnibaAppunti/Programmazione/eclipse-workspace/Es1 file/Debug/Es1.txt","w");
+			printf("Contenuto del file cancellato con successo...");
+			fclose(file_delete);
+		}
+		else if (scelta == '0')
+		{
+			casi=0;
+		}
+		else
+		{
+			casi=0;
+		}
+	} while(casi != 0);
+	system("pause");
+	return EXIT_SUCCESS;
+}
+void counterwords(FILE *fp){
+	int n_par=0; //intero che conta le parole del testo
+	int fine_parola=0; //booleano 0 vero parola corrente è terminata, 1 falso parola non terminata
+	getc(fp);
+	while(c!=EOF)
+	{
+
+	}
+	 return;
+}
+/*
+fopen()- crea un nuovo file o apri un file esistente
+fclose()- chiude un file
+getc()- legge un carattere da un file
+putc()- scrive un carattere in un file
+fscanf()- legge un insieme di dati da un file
+fprintf()- scrive un insieme di dati in un file
+getw()- legge un numero intero da un file
+putw()- scrive un numero intero in un file
+fseek()- imposta la posizione sul punto desiderato
+ftell()- fornisce la posizione corrente nel file
+rewind()- imposta la posizione al punto iniziale
+ */
+void inputfile(FILE *fp) {
+	char stringa[50];
+	printf("\n-----------------------------------------\n");
+	if (fp != NULL) {
+		printf("[+] File aperto con successo!\n");
+		printf("Indicami cosa vuoi inserire nel file:\n");
+		fflush(stdin);
+		scanf(" %50[^\n]",stringa);
+		fprintf(fp,"%s\n", stringa);
+		printf("[+] Scrittura effettuata!\n");
+	} else {
+		printf("[!] Errore durante l'apertura del file!");
+	}
+	printf("\n-----------------------------------------\n");
+	return;
+}
+void outputfile(FILE *fp) {
+	char stringa[50];
+	int flag = 0;
+	printf("\n-----------------------------------------\n");
+	if (fp !=NULL) {
+		printf("[+] File aperto con successo per la lettura!\n");
+		while(flag == 0)
+		{
+			if (!feof(fp))
+			{
+				flag = 1;
+			}
+			fgets(stringa, 50, fp);
+			printf("%s",stringa);
+			fflush(stdout);
+		}
+	} else {
+		printf("[!] Errore durante l'apertura del file per la lettura!");
+	}
+	printf("\n-----------------------------------------\n");
+	return;
+}

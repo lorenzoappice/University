@@ -1,0 +1,11 @@
+18:09:03 **** Incremental Build of configuration Debug for project Esercitazione 15 dicembre ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Esercitazione 15 dicembre.o" "..\\src\\Esercitazione 15 dicembre.c" 
+..\src\Esercitazione 15 dicembre.c: In function 'MediaVoti':
+..\src\Esercitazione 15 dicembre.c:94:8: warning: 'dim' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   while(pos<=dim)
+        ^
+gcc -o "Esercitazione 15 dicembre.exe" "src\\Esercitazione 15 dicembre.o" 
+
+18:09:04 Build Finished. 0 errors, 1 warnings. (took 535ms)
+

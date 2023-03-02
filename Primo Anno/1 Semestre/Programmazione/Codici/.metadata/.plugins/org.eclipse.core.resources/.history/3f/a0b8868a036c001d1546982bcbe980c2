@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	int N;
+	int K;
+	int Pos=0;
+	int Val=1;
+	int V[N];
+	printf("Indicami il valore di N: ");fflush(stdout);
+	scanf("%d",&N);
+	printf("Indicami il valore di K: ");fflush(stdout);
+	scanf("%d",&K);
+
+	return EXIT_SUCCESS;
+}

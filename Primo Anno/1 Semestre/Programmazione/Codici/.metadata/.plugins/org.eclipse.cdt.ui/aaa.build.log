@@ -1,0 +1,152 @@
+21:57:44 **** Incremental Build of configuration Debug for project aaa ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\aaa.o" "..\\src\\aaa.c" 
+..\src\aaa.c:78:68: error: parameter 3 ('ORARIO1') has incomplete type
+ struct orario InserireOrario (int righe, int colonne,struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+                                                                    ^~~~~~~
+..\src\aaa.c:78:15: error: return type is an incomplete type
+ struct orario InserireOrario (int righe, int colonne,struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+               ^~~~~~~~~~~~~~
+..\src\aaa.c: In function 'InserireOrario':
+..\src\aaa.c:79:12: warning: implicit declaration of function 'ScrivereRighe' [-Wimplicit-function-declaration]
+  ORARIO1 = ScrivereRighe(ORARIO1, righe);
+            ^~~~~~~~~~~~~
+..\src\aaa.c:80:12: warning: implicit declaration of function 'ScrivereColonne' [-Wimplicit-function-declaration]
+  ORARIO1 = ScrivereColonne (ORARIO1, colonne);
+            ^~~~~~~~~~~~~~~
+..\src\aaa.c:87:16: warning: implicit declaration of function 'LeggereColonne' [-Wimplicit-function-declaration]
+  while (posC<= LeggereColonne(ORARIO1)) {
+                ^~~~~~~~~~~~~~
+..\src\aaa.c:88:16: warning: implicit declaration of function 'LeggereRighe' [-Wimplicit-function-declaration]
+   while (posR<=LeggereRighe(ORARIO1)) {
+                ^~~~~~~~~~~~
+..\src\aaa.c:97:14: warning: implicit declaration of function 'inserireLezione' [-Wimplicit-function-declaration]
+    ORARIO1 = inserireLezione(ORARIO1, posC,posR, NuovaMateria,NuovaAula,NuovaOraInizio,NuovaOraFine);
+              ^~~~~~~~~~~~~~~
+..\src\aaa.c:102:9: warning: 'return' with a value, in function returning void
+  return ORARIO1;
+         ^~~~~~~
+..\src\aaa.c:78:15: note: declared here
+ struct orario InserireOrario (int righe, int colonne,struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+               ^~~~~~~~~~~~~~
+..\src\aaa.c: At top level:
+..\src\aaa.c:105:91: error: parameter 4 ('ORARIO1') has incomplete type
+ struct orario ModificaOrario (int giorno, int ora, struct LEZIONE LEZIONE1, struct orario ORARIO1) {
+                                                                                           ^~~~~~~
+..\src\aaa.c:105:15: error: return type is an incomplete type
+ struct orario ModificaOrario (int giorno, int ora, struct LEZIONE LEZIONE1, struct orario ORARIO1) {
+               ^~~~~~~~~~~~~~
+..\src\aaa.c: In function 'ModificaOrario':
+..\src\aaa.c:111:11: warning: format '%d' expects argument of type 'int', but argument 2 has type 'int *' [-Wformat=]
+  printf("%d", & giorni);
+           ^
+..\src\aaa.c:112:13: warning: implicit declaration of function 'LeggereLEZIONE' [-Wimplicit-function-declaration]
+  LEZIONE1 = LeggereLEZIONE (ORARIO1 , ore, giorni);
+             ^~~~~~~~~~~~~~
+..\src\aaa.c:116:13: warning: implicit declaration of function 'ScrivereAula' [-Wimplicit-function-declaration]
+  LEZIONE1 = ScrivereAula(ORARIO1, NuovaAula);
+             ^~~~~~~~~~~~
+..\src\aaa.c:120:13: warning: implicit declaration of function 'ScrivereMateria' [-Wimplicit-function-declaration]
+  LEZIONE1 = ScrivereMateria (ORARIO1, NuovaMateria);
+             ^~~~~~~~~~~~~~~
+..\src\aaa.c:130:12: warning: implicit declaration of function 'ScrivereLEZIONE' [-Wimplicit-function-declaration]
+  ORARIO1 = ScrivereLEZIONE (ORARIO1, LEZIONE1, ora, giorno);
+            ^~~~~~~~~~~~~~~
+..\src\aaa.c:131:9: warning: 'return' with a value, in function returning void
+  return ORARIO1;
+         ^~~~~~~
+..\src\aaa.c:105:15: note: declared here
+ struct orario ModificaOrario (int giorno, int ora, struct LEZIONE LEZIONE1, struct orario ORARIO1) {
+               ^~~~~~~~~~~~~~
+..\src\aaa.c: At top level:
+..\src\aaa.c:134:67: error: parameter 3 ('ORARIO1') has incomplete type
+ struct orario CancellaLEZIONE (int giorni, int ore, struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+                                                                   ^~~~~~~
+..\src\aaa.c:134:15: error: return type is an incomplete type
+ struct orario CancellaLEZIONE (int giorni, int ore, struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+               ^~~~~~~~~~~~~~~
+..\src\aaa.c: In function 'CancellaLEZIONE':
+..\src\aaa.c:141:11: error: incompatible types when assigning to type 'struct LEZIONE' from type 'int'
+  LEZIONE1 = ScrivereAula (LEZIONE1, '-');
+           ^
+..\src\aaa.c:142:11: error: incompatible types when assigning to type 'struct LEZIONE' from type 'int'
+  LEZIONE1 = ScrivereMateria (LEZIONE1, '-');
+           ^
+..\src\aaa.c:143:13: warning: implicit declaration of function 'ScrivereOraInizio' [-Wimplicit-function-declaration]
+  LEZIONE1 = ScrivereOraInizio (LEZIONE1,0.0);
+             ^~~~~~~~~~~~~~~~~
+..\src\aaa.c:143:11: error: incompatible types when assigning to type 'struct LEZIONE' from type 'int'
+  LEZIONE1 = ScrivereOraInizio (LEZIONE1,0.0);
+           ^
+..\src\aaa.c:144:13: warning: implicit declaration of function 'ScrivereOraFine' [-Wimplicit-function-declaration]
+  LEZIONE1 = ScrivereOraFine (LEZIONE1, 0.0);
+             ^~~~~~~~~~~~~~~
+..\src\aaa.c:144:11: error: incompatible types when assigning to type 'struct LEZIONE' from type 'int'
+  LEZIONE1 = ScrivereOraFine (LEZIONE1, 0.0);
+           ^
+..\src\aaa.c:146:9: warning: 'return' with a value, in function returning void
+  return ORARIO1;
+         ^~~~~~~
+..\src\aaa.c:134:15: note: declared here
+ struct orario CancellaLEZIONE (int giorni, int ore, struct orario ORARIO1, struct LEZIONE LEZIONE1) {
+               ^~~~~~~~~~~~~~~
+..\src\aaa.c: At top level:
+..\src\aaa.c:149:65: error: parameter 2 ('ORARIO1') has incomplete type
+ struct orario ConsultazionePerGiorno (int giorno, struct orario ORARIO1) {
+                                                                 ^~~~~~~
+..\src\aaa.c:149:15: error: return type is an incomplete type
+ struct orario ConsultazionePerGiorno (int giorno, struct orario ORARIO1) {
+               ^~~~~~~~~~~~~~~~~~~~~~
+..\src\aaa.c: In function 'ConsultazionePerGiorno':
+..\src\aaa.c:161:9: warning: 'return' with a value, in function returning void
+  return ORARIO1;
+         ^~~~~~~
+..\src\aaa.c:149:15: note: declared here
+ struct orario ConsultazionePerGiorno (int giorno, struct orario ORARIO1) {
+               ^~~~~~~~~~~~~~~~~~~~~~
+..\src\aaa.c:152:6: warning: unused variable 'righe' [-Wunused-variable]
+  int righe;
+      ^~~~~
+..\src\aaa.c: At top level:
+..\src\aaa.c:164:59: error: parameter 2 ('ORARIO1') has incomplete type
+ struct orario ConsultazionePerOra (int ora, struct orario ORARIO1){
+                                                           ^~~~~~~
+..\src\aaa.c:164:15: error: return type is an incomplete type
+ struct orario ConsultazionePerOra (int ora, struct orario ORARIO1){
+               ^~~~~~~~~~~~~~~~~~~
+..\src\aaa.c: In function 'ConsultazionePerOra':
+..\src\aaa.c:177:9: warning: 'return' with a value, in function returning void
+  return ORARIO1;
+         ^~~~~~~
+..\src\aaa.c:164:15: note: declared here
+ struct orario ConsultazionePerOra (int ora, struct orario ORARIO1){
+               ^~~~~~~~~~~~~~~~~~~
+..\src\aaa.c:168:6: warning: unused variable 'Lezioniora' [-Wunused-variable]
+  int Lezioniora;
+      ^~~~~~~~~~
+..\src\aaa.c:166:6: warning: unused variable 'NumeroColonne' [-Wunused-variable]
+  int NumeroColonne;
+      ^~~~~~~~~~~~~
+..\src\aaa.c: At top level:
+..\src\aaa.c:181:70: error: parameter 2 ('ORARIO1') has incomplete type
+ struct LEZIONE  ConsultazionePerMateria (char materia, struct orario ORARIO1, struct LEZIONE LEZIONE1){
+                                                                      ^~~~~~~
+..\src\aaa.c: In function 'main':
+..\src\aaa.c:205:2: warning: implicit declaration of function 'ScriverRighe' [-Wimplicit-function-declaration]
+  ScriverRighe();
+  ^~~~~~~~~~~~
+..\src\aaa.c:210:2: warning: implicit declaration of function 'LeggereAula' [-Wimplicit-function-declaration]
+  LeggereAula();
+  ^~~~~~~~~~~
+..\src\aaa.c:212:2: warning: implicit declaration of function 'LeggereMateria' [-Wimplicit-function-declaration]
+  LeggereMateria();
+  ^~~~~~~~~~~~~~
+..\src\aaa.c:214:2: warning: implicit declaration of function 'LeggereOraInizio' [-Wimplicit-function-declaration]
+  LeggereOraInizio();
+  ^~~~~~~~~~~~~~~~
+..\src\aaa.c:216:2: warning: implicit declaration of function 'LeggereOraFine' [-Wimplicit-function-declaration]
+  LeggereOraFine();
+  ^~~~~~~~~~~~~~
+
+21:57:45 Build Failed. 15 errors, 25 warnings. (took 183ms)
+

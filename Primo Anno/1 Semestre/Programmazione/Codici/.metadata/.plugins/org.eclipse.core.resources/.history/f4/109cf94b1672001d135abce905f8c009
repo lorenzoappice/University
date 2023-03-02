@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#define Dim_max 100
+struct Elenco
+{
+	int Dimensione;
+	int Valori[Dim_max];
+};
+int leggereDimensione (struct Elenco Elenco1){
+	return Elenco1.Dimensione;
+}
+int leggereValore (struct Elenco Elenco1, int posv){
+	return Elenco1.Valori[posv];
+}
+struct Elenco scrivereDimensione(struct Elenco Elenco1, int dim){
+	Elenco1.Dimensione=dim;
+	return Elenco1;
+}
+struct Elenco scrivereValore(struct Elenco Elenco1, int val, int posv){
+	Elenco1.Valori[posv]=val;
+	return Elenco1;
+}
+struct Elenco InputTastiera(struct Elenco Elenco1, int Dim){
+	int N;
+	int Pos=0;
+	while(Pos<leggereDimensione(Elenco1)){
+		printf("Indicami il valore: \n");
+		scanf("%d",&N);
+		Elenco1=scrivereValore(Elenco1,N,Pos);
+		Pos=Pos+1;
+	}
+	return Elenco1;
+}
+struct Elenco Somma(struct Elenco Elenco1,struct Elenco Elenco2){
+    int Pos=0;
+    struct Elenco Somma;
+    Somma=scrivereDimensione(Somma,leggereDimensione(Elenco1));
+    //dimensione Elenco1 e Elenco 2 sono uguali
+    while (Pos<leggereDimensione(Elenco1))
+    {
+    	Somma= scrivereValore(Somma,leggereValore(Elenco1,Pos)+leggereValore(Elenco2,Pos),Pos);
+    	Pos=Pos+1;
+    }
+	return Somma;
+}
+struct Elenco Sottrazione(struct Elenco Elenco1, struct Elenco Elenco2){
+	int Pos=0;
+	struct Elenco Sottrazione;
+	 Sottrazione=scrivereDimensione(Sottrazione,leggereDimensione(Elenco1));
+	//dimensione Elenco1 e Elenco 2 sono uguali
+	while(Pos<leggereDimensione(Elenco1))
+	{
+		Sottrazione=scrivereValore(Sottrazione,leggereValore(Elenco1,Pos)-leggereValore(Elenco2,Pos),Pos);
+		Pos=Pos+1;
+	}
+	return Sottrazione;
+}
+int  Max(struct Elenco Elenco1){
+	int Pos=0;
+	int Massimo= INT_MIN;
+	while (Pos<leggereDimensione(Elenco1))
+	{
+		if(Massimo<leggereValore(Elenco1,Pos))
+		{
+		Massimo= leggereValore(Elenco1,Pos);
+		}
+		Pos=Pos+1;
+	}
+	return Massimo;
+}
+void StampaSom(struct Elenco Elenco1){
+	int pos=0;
+	printf("Somma: ");
+	while(pos<leggereDimensione(Elenco1))
+	{
+		printf("%d\n",leggereValore(Elenco1,pos));
+		pos=pos+1;
+	}
+}
+void StampaSot(struct Elenco Elenco1){
+	int pos=0;
+	printf("Sottrazione: ");
+	while(pos<leggereDimensione(Elenco1))
+	{
+		printf("%d\n",leggereValore(Elenco1,pos));
+		pos=pos+1;
+	}
+}
+int main(void) {
+    struct Elenco E1;
+	struct Elenco E2;
+	struct Elenco Som;
+	struct Elenco Sot;
+	int Dim1;
+	int Dim2;
+	int max1;
+	int max2;
+	printf("Indicami la dimensione di E1: \n");
+     scanf(" %d",&Dim1);
+	E1=scrivereDimensione(E1,Dim1);
+	E1=InputTastiera(E1,Dim1);
+	printf("Indicami la dimensione di E2: \n");
+      scanf(" %d",&Dim2);
+	E2=scrivereDimensione(E2,Dim2);
+	E2=InputTastiera(E2,Dim2);
+	if(Dim1==Dim2)
+	{
+	Som=Somma(E1,E2);
+	Sot=Sottrazione(E1,E2);
+	StampaSom(Som);
+	StampaSot(Sot);
+	}
+	else
+	{
+	  printf("Somma e sottrazioni non disponibili, le dimensioni di E1 e E2 devono essere uguali");
+	}
+	max1=Max(E1);
+	max2=Max(E2);
+	printf("Max di E1: %d",max1);
+	printf("\nMax di E2: %d \n",max2);
+	system("pause");
+	return EXIT_SUCCESS;
+}

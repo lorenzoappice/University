@@ -1,0 +1,17 @@
+15:08:20 **** Incremental Build of configuration Debug for project Orario ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Orario.o" "..\\src\\Orario.c" 
+..\src\Orario.c:17:63: error: unknown type name 'Lezione'
+ void scrivilezione(struct Orario Orario1,int ora, int giorno, Lezione NuovaLezione){
+                                                               ^~~~~~~
+..\src\Orario.c: In function 'InserimentoOrario':
+..\src\Orario.c:30:9: error: 'Orario' undeclared (first use in this function)
+  return Orario;
+         ^~~~~~
+..\src\Orario.c:30:9: note: each undeclared identifier is reported only once for each function it appears in
+..\src\Orario.c:31:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+
+15:08:20 Build Failed. 2 errors, 1 warnings. (took 285ms)
+

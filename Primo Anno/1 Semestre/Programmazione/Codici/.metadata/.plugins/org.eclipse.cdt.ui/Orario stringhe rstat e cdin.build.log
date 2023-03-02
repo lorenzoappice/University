@@ -1,0 +1,7 @@
+00:58:12 **** Rebuild of configuration Debug for project Orario stringhe rstat e cdin ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Orario stringhe rstat e cdin.o" "..\\src\\Orario stringhe rstat e cdin.c" 
+gcc -o "Orario stringhe rstat e cdin.exe" "src\\Orario stringhe rstat e cdin.o" 
+
+00:58:13 Build Finished. 0 errors, 0 warnings. (took 556ms)
+

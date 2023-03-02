@@ -1,0 +1,7 @@
+18:23:43 **** Incremental Build of configuration Debug for project Prodotto cartesiano 2 insiemi ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Prodotto cartesiano 2 insiemi.o" "..\\src\\Prodotto cartesiano 2 insiemi.c" 
+gcc -o "Prodotto cartesiano 2 insiemi.exe" "src\\Prodotto cartesiano 2 insiemi.o" 
+
+18:23:43 Build Finished. 0 errors, 0 warnings. (took 430ms)
+

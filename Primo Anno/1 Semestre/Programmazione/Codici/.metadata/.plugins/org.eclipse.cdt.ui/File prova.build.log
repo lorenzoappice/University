@@ -1,0 +1,8 @@
+18:25:44 **** Incremental Build of configuration Debug for project File prova ****
+Info: Internal Builder is used for build
+gcc -o "File prova.exe" "src\\File prova.o" 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file File prova.exe: Invalid argument
+collect2.exe: error: ld returned 1 exit status
+
+18:25:44 Build Failed. 1 errors, 0 warnings. (took 267ms)
+

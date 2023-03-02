@@ -1,0 +1,10 @@
+15:08:19 **** Incremental Build of configuration Debug for project Massimo tra N numeri interi ****
+Info: Internal Builder is used for build
+gcc -o "Massimo tra N numeri interi.exe" "src\\Massimo tra N numeri interi.o" 
+src\Massimo tra N numeri interi.o: In function `main':
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Massimo tra N numeri interi\Debug/../src/Massimo tra N numeri interi.c:6: undefined reference to `Printf'
+C:\Users\Lorenzo\OneDrive\Desktop\Appunti\Programmazione\eclipse-workspace\Massimo tra N numeri interi\Debug/../src/Massimo tra N numeri interi.c:8: undefined reference to `Printf'
+collect2.exe: error: ld returned 1 exit status
+
+15:08:19 Build Failed. 2 errors, 0 warnings. (took 481ms)
+
