@@ -1,0 +1,67 @@
+struct orario {
+int ore;
+int giorni;
+}
+P1 Statico 2 dim con le stringhe;
+P2 lezione * tabella [7] con stringhe;
+P3lezione * tabella [24] con stringhe;
+P4 lezione **tabella con stringhe;
+4 progetti entro giovedì 15
+
+
+int * M; M è un puntatore a intero.
+M= (int **)malloc (nRighe * sizeof(int *))
+
+P4: LEZIONE ** TABELLA; (Puntatore doppio):
+int main ()
+{
+  int ** m;//m qui vale NULL
+  int nRighe; //vale 4 
+  int nColonne; //vale 10
+  i = 0;
+  // chiedere all'utente il num di righe -> nRighe
+  // chiedere all'utente il num di colonne -> nColonne
+  m= (int **)malloc (nRighe * sizeof(int *))//m non vale NULL (mi ha creato le righe)
+  ora devo allocare lo spazio per le righe 
+  while (i<nRighe)
+  {
+    *(m +i) = int* malloc (nColonne * sizeof(int *)) //indirizzo di quella allocazione di memoria 
+    i = i +1;
+  }
+  se voglio accedere alla riga 2 : *(*(m+2)+ 7(colonna) ) //accedere agli el sia per leggere che per cambiarne il contenuto
+  
+  }
+
+
+
+P2: LEZIONE * TABELLA; (Puntatore singolo righe):
+int main ()
+{
+  int * m [righe]; //righe costante dichiarata fuori dal main, m dopo questo è un array con 4 elementi dove ogni el è un puntatore a int
+  non ho bisogno di allocare le righe ad m perchè sono allocate dinamicamente.
+  per cui niente malloc
+  int nColonne=10;
+  int i=0;
+  while (i<righe)
+  {
+    m[i] = (int *) malloc (nColonne * sizeof(int));
+    i=i+1;
+  }
+accesso: *(m[2]+7); //accesso a riga 2 colonna 7
+  }
+
+ P3 : LEZIONE * TABELLA; (Puntatore singolo colonne): 
+  int main ()
+{
+  int * m [colonne]; //colonne costante dichiarata fuori dal main, m dopo questo è un array con 4 elementi dove ogni el è un puntatore a int
+  non ho bisogno di allocare le righe ad m perchè sono allocate dinamicamente.
+  per cui niente malloc
+  int nRighe=4;
+  int i=0;
+  while (i<colonne)
+  {
+    m[i] = (int *) malloc (nRighe * sizeof(int));
+    i=i+1;
+  }
+accesso: *(m[7]+2); //accesso colonna 7 riga 2
+  }

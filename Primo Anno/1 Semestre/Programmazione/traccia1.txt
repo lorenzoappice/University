@@ -1,0 +1,40 @@
+Funzione principale:
+Input:
+A,prima matrice di interi, array a 2 dimensioni di interi
+B,seconda matrice di interi, array a 2 dimensioni di interi
+N,numero di Righe  di matrice A e B, intero>0
+M,numero di Colonne di matrice A e B, intero>0
+Output:
+C,, array a 2 dimensioni di interi,di dimensione uguale ad A e B
+Dati di lavoro:
+Posc,contatore delle colonne, intero>0 e <= M
+Posr,contatore delle righe,intero>0  e <= N
+Val1,prodotto degli elementi di una colonna di A, intero>0  
+Val2,prodotto degli elementi di una colonna di B,intero>0  
+
+Algoritmo:
+Posc=1
+Mentre(Posc<=M)
+  Posr=1 
+  Val1=1
+  Val2=1
+  Mentre(Posr<=N)
+    Val1=Val1*elemento di A in pos M,N  //NON IN POSIZIONE M,N 
+    Val2=Val2*elemento di B in pos M,N   // COME SOPRA
+    Posr=Posr+1
+  Fine
+  Posr=1  
+  Se(Val1>Val2)
+   Allora
+   Mentre(Posr<=N)
+     Elemento di C in pos M,N = elemento di A in pos M,N  //NON IN POSIZIONE M,N
+     Posr=Posr+1
+   Fine
+   Altrimenti
+   Mentre(Posr<=N)
+     Elemento di C in pos M,N= elemento di B in pos M,N  //COME SOPRA
+     Posr=Posr+1
+   Fine
+  Posc=Posc+1
+Fine
+Stampa(C)  //STAMPA COSA SAREBBE?

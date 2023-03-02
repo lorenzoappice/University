@@ -1,0 +1,48 @@
+Funzione Pincipale:
+Input:
+Matrice, array a 2 dimensione di interi composto da numeri tra 0 e 9 interi
+Righe, numero di righe dell'array,intero >0
+Colonne, numero di colonne dell'array, intero>0
+Output:
+C,, array a 1 dimensione di interi composto da interi tra 0 e 9.  //COSA SIGNIFICA ARRAY CON LA SOMMA DELLA MATRICE?
+Algoritmo:
+Posc=Colonne
+PosA=Colonne+1  
+rip=0
+Mentre(Posc>=1)
+  Posr=1
+  Somma=0
+  Mentre(Posr<=Righe)
+    Somma= somma + Elemento di Matrice in pos Posr,Posc 
+    Posr=Posr+1
+  Fine
+  somma=somma+rip
+  Se(Somma>9)
+   Allora rip=somma/10
+     elemento di C in pos PosA=Calcolareresto(somma,10)
+   Altrimenti
+     elemento di C in pos PosA=somma
+     rip=0
+  Fine
+  PosA=PosA-1 
+  Posc=Posc-1  
+Fine
+Stampa(c)
+Dati di lavoro:
+Posc,contatore delle colonne di Matrice,intero>0 e <= COLONNE
+Posr,contatore delle righe di Matrice,intero>0 e <= RIGHE
+Somma,variabile somma della colonna,intero>=0  
+rip,riporto della somma,intero>=0
+PosA,contatore delle posizioni di C,intero>0 <=COLONNE+1
+
+Funzione Calcolaresto:
+Input:
+Somma,dividendo della divisione,intero>=0
+val,divisore della divisione,intero>=0
+Output:
+resto,contiene il resto della divisione,intero>=0
+Algoritmo:
+resto=Somma
+Mentre(resto>=10)
+  resto=resto-10
+Fine
