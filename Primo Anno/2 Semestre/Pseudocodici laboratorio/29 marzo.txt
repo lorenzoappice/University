@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+int VerificaPalindroma(char Testo[],int C){
+	int pos=0;
+	int Esito=1;
+	int posmax=C-2;
+	while(pos<((C-1)/2)){
+		if(Testo[pos]!=Testo[posmax])
+		{
+			Esito=0;
+		}
+		pos=pos+1;
+		posmax=posmax-1;
+	}
+	return Esito;
+}
+int LunghezzaSequenza(){
+	int C=0;
+	char l;
+	FILE *fp = fopen("File.txt","r");
+	while(l!='\n' && l!=EOF){
+		l=fgetc(fp);
+		C=C+1;
+	}
+	fclose(fp);
+	return C;
+}
+int main(void) {
+	int Esito;
+	int C;
+	C=LunghezzaSequenza();
+	FILE *fp = fopen("File.txt","r");
+	char *Testo=calloc(C,sizeof(char));
+	char b;
+	//Funzione LetturaDalFile
+	int p=0;
+		while(p<C-1){
+		b=fgetc(fp);
+		Testo[p]=b;
+		p=p+1;
+		}
+	//Funzione ConvertiMaiusc
+		int i=0;
+		while(i<C)
+		{
+		Testo[i]= tolower(Testo[i]);
+		i=i+1;
+		}
+	Esito=VerificaPalindroma(Testo,C);
+	//Funzione di stampa
+	if(Esito==1){
+		printf("La sequenza e' palindroma\n");
+	}
+	else
+	{
+		printf("La sequenza non e' palindroma\n");
+	}
+	fclose(fp);
+	system("pause");
+	return EXIT_SUCCESS;
+}
