@@ -1,0 +1,438 @@
+CAPITOLO 1:
+Macchina fisica = consente di eseguire algoritmi formalizzati(tradotti) perché siano “comprensibili” dall’esecutore.
+ - Formalizzazione:  dcodifica di algoritmi in un certo linguaggio (L)efinito da una specifica sintassi.
+ - La sintassi di L permette di utilizzare i costrutti per comporre programmi in L.
+ - Un programma in L è una sequenza di istruzioni del linguaggio L.
+
+Macchina astratta per L(ML) = Un insieme di algoritmi e strutture dati che permettono di memorizz. ed eseguire programmi scritti in L.
+ Composta da: Una memoria per immagazzinare dati e programmi e Un interprete che esegue le istruzioni contenute nei programmi.
+ Linguaggio Macchina = Data una macchina astratta ML, il linguaggio L "compreso" dall'interprete di ML è detto linguaggio macchina di ML.
+
+Interprete = è un programma che si occupa del controllo della sequenza delle istruzioni del linguaggio, controllo dei dati e gestire la
+memoria, es: va a prendere i valori delle variabili dalla memoria.
+  Operazioni interprete = 
+   - Elaborazioine dei dati primitivi(int,real,aritm);
+   - Operazioni e strutture dati per il controllo della sequenza di esecuzione;
+   - Operazioni e strutture dati per il controllo del trasferimento dei dati;
+   - Operazioni e strutture dati per la gestione della memoria; 
+
+Funzione parziale = Una funzione parziale f: A->B è una corrispondenza tra elementi dell'insieme A e quelli dell'insieme B
+
+L’interprete, per eseguire un’istruzione i di L, le fa corrispondere un insieme di istruzioni di L0. 
+Tale decodifica non è una traduzione esplicita poiché il codice corrispondente a i è eseguito direttamente e non prodotto in uscita.
+
+Compilatore= Un compilatore da L a L0 è un programma che realizza la funzione:  Cl,L0 : Prog^L -> Prog^L0
+Per eseguire PL su Input, bisogna eseguire CL,L0 con PL come input. 
+Si avrà come risultato un programma compilato PcL0 scritto in L0, che sarà eseguito su M0L0 con il dato in ingresso Input
+
+Funzione parziale Calcolabile= Una funzione parziale f: A  B è calcolabile nel linguaggio L
+se esiste un programma P scritto in L tale che:
+ Se f(a) = b allora P(a) termina e produce come output b
+ Se f(a) non è definita allora P con input a va in ciclo (si, esistono funzioni non calcolabili)
+
+Macchne di turing (Mdt)= Permettono di verificare se la funzione è calcolabile per tutti i linguaggi.
+Una MdT è definita da una quintupla: M = (X, Q, fm, fd, (gamma))
+ X = insieme finito di simboli (comprende il blank ovvero cella vuota)
+ Q = insieme finito di stati (comprende HALT che definisce la terminazione)
+ Funzione di macchina fm:Q x X-> X (Determina il simbolo da scrivere sul nastro)
+ Funzione di direzione fd: Q x X -> {S,D,F} (Determina lo spostamento della testina, S=Sinistra, D=Destra, F=Ferma)
+ Funzione di transizione di stato (gamma): Q x X -> Q (Definisce lo stato successivo della computazione)
+
+La MdT Universale (MdTU)= 
+Legge dal nastro i dati e il programma(anche le 5-ple).
+è una macchina programmabile. (fetch->decode->execute)
+è un interprete
+
+Un linguaggio di programmazione L = è un formalismo per portare al livello di macchina fisica gli algoritmi
+ Implementare L significa realizzarne l’interprete ovvero
+il programma che esegue la traduzione di L per la macchina ospite.
+
+BNF = Notazione usata per descrivere la sintassi dei linguaggi di programmazione.
+Semantica= corretto significato.
+Sintassi= corretta struttura grammaticale.(per i linguaggi importante)
+
+Grammatiche libere da contesto (C.F.) = Una classe importante di regole che generano linguaggi formali.
+è un LINGUAGGIO DALLE PARENTESI BEN FORMATE che comprende tutte le stringhe di
+parentesi aperte e chiuse bilanciate correttamente:
+ i) La stringa è ben formata;
+ ii) se la stringa di simboli A è ben formata, allora lo
+è anche A ;
+ iii) se le stringhe A e B sono ben formate, allora lo
+è anche la stringa AB.
+
+Regole di produzione / produzioni = 
+1: S -> ()
+2: S -> (S)
+3: S -> SS
+Stabiliscono che "data una stringa si può formare una nuova stringa sostituendo 
+una S o con () o con (S) o con SS".
+
+Derivazione = Sequenza di applicazioni di regole di produzione: 3 -> 2 -> 3 -> 1 -> 1 -> 2 -> 1
+=> Con il numero sotto si dice produce direttamente per applicazione della regola di riscrittura n.
+=> Con * sopra si dice es : S produce (())(()()).
+
+Simboli non terminali / variabili = caratteri che non possono apparire nelle stringhe finali.
+Simboli terminali = caratteri che possono apparire nelle stringhe finali.
+
+CAPITOLO 2:
+
+- Alfabeto= Insieme X finito e non vuoto di simboli.
+- Parola= Sequenza finita di simboli x1x2...xnm dove ogni xi è preso da uno stesso alfabeto X è una parola su X.
+ + La lunghezza di una stringa w è denotata con |w|.
+ + La parola vuota denotata con lambda = stringa priva di simboli e ha lunghezza 0.
+
+- Uguaglianza tra stringhe= Due stringhe sono uguali se i loro caratteri, letti
+ordinatamente da sinistra a destra, coincidono. 
+
+- X*=  L’insieme di tutte le stringhe di lunghezza finita sull’alfabeto X si denota con X*.
+(Ha un numero di elementi che è un infinito numerabile).
+
+- Concatenazione o prodotto= Sia alfa compreso X* una stringa di lunghezza m e beta compreso X* una
+stringa di lunghezza n, la concatenazione di alfa e beta, denotata con alfabeta o alfa per beta, 
+è definita come la stringa di lunghezza m+n, i cui primi m simboli costituiscono
+una stringa uguale a alfa ed i cui ultimi n simboli costituiscono una stringa uguale a beta.
+   + Quindi se alfa = x1x2...xm e beta = x1'x2'..xn' si ha : alfabeta= x1x2..xmx1'x2'...xn'.
+
+-Operazione di concatenazione = La concatenazione di stringhe su X è una operazione binaria su X*:
+ . : X* x X* -> X*.
+  + è associativa: (alfabeta)δ= alfa(betadelta) = alfabetadelta compresi tutti in X*
+  + non è commutativa: Esiste alfa,beta compreso X* : alfabeta != betaalfa
+  + ha elemento neutro lamba: lambdaalfa = alfalamba = alfa    alfa compreso X*.
+Quindi (X*,. ) è un monoide.
+
+- Prefisso= Sia delta € X*. se delta = alfa beta, con alfa, beta € X*, 
+allora alfa è detto prefisso di delta e beta è detto suffisso di delta.
+- Sottostringa= Sia delta € X*. se delta = alfa beta gamma, con alfa, beta, gamma € X*, 
+allora beta è detta sottostringa di delta.
+- Potenza di una stringa= data una stringa alfa su X, la potenza h-esima di alfa è lambda se h= 0
+oppure alfaalfa^h-1 con h != 0.
+
+-Linguaggio formale= Un linguaggio formale L su un alfabeto X è un sottoinsieme proprio di X*.
+
+- Una grammatica generativa è una quadrupla G = (X, V, S, P) con:
+ + X alfabeto di simboli terminali;
+ + V insieme finito di simboli nonterminali/variabili;
+ + S simbolo di partenza per la grammatica;
+ + P insieme di produzioni della grammatica dove valgono:
+   + X intersecato V = insieme vuoto (X e V disgiunti), S € V.
+-Una produzione= è una coppia (v, w) indicata con v->w dove v € (X U V)+  e  w € (X U V)*.
+
+-Derivazione/produzione diretta= diciamo che y produce direttamente z se : alfa -> beta compreso P
+ossia se esiste in G una produzione alfa -> beta
+-Derivazione/produzione= y=>*z y produce z se y = z o esiste una sequenza di stringhe.
+- =>* = è la chiusura riflessiva e transitiva della relazione di derivazione diretta.
+- =>+ = è la chiusura transitiva della stessa relazione.
+
+-Linguaggio generato da G= denotato con L(G), è l'insieme delle stringhe di terminali derivabili dal simbolo di partenza S.
+L(G) = { w compreso X* | S =>* w}
+
+-Forma di frase= Sia G=(X,V,S,P) una grammatica. Una stringa w compreso (X unione V)* è una forma di frase se: 
+ + S=>*w.
+
+-Grammatiche equivalenti= Due grammatiche G e G' sono dette equivalenti se L(G) = L(G').
+
+CAPITOLO 3:
+
+-Grammatica context-free= Una grammatica G = (X,V,S,P) è libera da contesto se per ogni produzione v -> w, v è un non terminale.
+-Linguaggio context-free= Un linguaggio L su un alfabeto X è libero da contesto se può essere generato da una grammatica libera da contesto.
+
+-Grammatica context-sensitive= Una grammatica G = (X,V,S,P) è dipendente da contesto se ogni produzione è in una delle seguenti forme:
+ + yAz -> ywz, A può essere sostituita con w nel contesto sinistro y e destro z.
+ + S -> lambda purchè S non compaia nella parte destra di alcuna produzione.
+-Linguaggio context-sensitive= Un linguaggio L è dipendente da contesto se può essere generato da una grammatica dipendente da contesto.
+
+-Grammatica monotona= Una grammatica G = (X,V,S,P) è monotona se ogni sua produzione è monotona cioè se: 
+ + Per ogni v -> w compreso P : |v| <= |w|
+-Linguaggio monotono= Un linguaggio L è monotono se può essere generato da una grammatica monotona.
+
+CAPITOLO 4:
+
+-Albero di derivazione= Albero di derivazione per w l'albero Tw avente le seguenti proprietà:
+ + la radice è etichettata con il simbolo iniziale S;
+ + ogni nodo interno è etichettato con un simbolo di V (un nonterminale);
+ + ogni nodo foglia è etichettato con un simbolo di X (un terminale) o lambda;
+ + Un nodo N etichettato A, N ha k discendenti (N1,N2,..Nk) etichettati con i simboli (A1,A2,..,Ak) allora la produzione A -> A1 A2 ...Ak deve app. a P;
+ + La stringa w è ottenuta leggendo e concatenando le foglie dell'albero da sinistra a destra;
+
+-Lunghezza di un cammino= Dato un albero di derivazione, la lunghezza di un cammino dalla radice ad una foglia è data dal numero di nonterminali su quel cammino.
+-Altezza= L'altezza di un albero è data dalla luinghezza del suo cammino più lungo.
+
+-Derivazione destra (sinistra)= Data una grammatica G = (X,V,S,P) diremo che una derivazione S =>w, ove:
+S=>w1=>w2=>..=>wn = w; wi= yiAzi, wi+1 = yiwi'zi; i=1,2,..,n-1;
+è destra (sinistra) se, per ogni i, i=1,2,..,n-1 risulta : zi compreso X* (yi compreso X*) 
+
+-Principio sostituzione sottoalbero=
+-Lemma= Sia G= (X,V,S,P) una grammatica C.F. e supponiamo che m= max {|v| | A->v compreso P}
+Sia Tw un albero di derivazione per una stringa w di L(G), se l'altezza di Tw è al più uguale ad un intero j allora: |w|<=m^j
+in formule: height(Tw)<= J => |w|<=m^j
+
+-Pumping lemma=Sia L un linguaggio C.F. allora esiste p,che dipende da L, t.c. se z compreso L di lunghezza |z|>p,
+  allora z può essere scritta come uvwxy t.c.:
+ + |vwx| <= p
+ + vx != lambda
+ + Per ogni i>=0: uv^iwx^iy compreso L
+
+-Grammatica Ambigua= Una grammatica G libera da conteesto è ambigua se esiste una stringa x in L(G) cha ha due alberi di derivazione differenti.
+Oppure se esiste una stringa x in L(G) che ha due derivazioni sinistre(destre) distinte.
+-Linguaggio inerentemente ambiguo= Un linguaggio L è inerentemente ambiguo se ogni grammatica che lo genera è ambigua.
+
+
+CAPITOLO 5:
+
+-Gerarchia di chomsky (1956-1959)= Sia G= (X,V,S,P) una grammatica, a seconda delle restrizioni imposte sulle regole di produzione si distinguono
+le varie classi di grammatiche:
+ + Tipo ‘0’ - Quando le stringhe che appaiono nella produzione v->w non sono soggette ad alcuna limitazione.
+ + Tipo ‘1’ - Dipendente da contesto - quando le produzioni sono limitate alla forma:
+       (1) yAz->ywz, con A compreso V, y,z compreso (XuV)*, w compreso (XuV)^+
+       (2) S->lambda, purché S non compaia nella parte destra di alcuna produzione
+ + Tipo '2'- libera da contesto - quando le produzioni sono limitate alla forma: v->w con v compreso V
+ + Tipo '3'- lineare destra - quando le produzioni sono limitate alla forma:
+       (1) A->bC con A,C compreso V e b compreso X;
+       (2) A->b con A compreso V e b compreso Xu{lambda}
+-Teorema della gerarchia=
+Li = {L c X* | L=L(G), G di tipo i} ovvero : L3 c L2 c L1 c L0
+
+-Lemma della stringa vuota= Sia G=(X,V,S,P) una grammatica C.F. con almeno una lambda-produzione, allora esiste una grammatica C.F. G' t.c:
+ + L(G)=L(G')
+ + Se lambda non compreso L(G) allora in G' non esistono produzioni del tipo A->Lambda
+ + Se lambda compreso L(G) allora in G' esiste un'unica produzione S'->lambda, ove S' è il simbolo iniziale di G' ed S' non compare nella parte destra 
+ di alcuna produzione di G'.
+
+-Operazioni sui linguaggi= Siano L1 ed L2 due linguaggi definiti su uno stesso alfabeto X (L1,L2 sotto.proprio X*).
+ + L'unione di L1 ed L2 è: L1 u L2 = {w|w compreso L1 v w compreso L2}
+ + La concatenazione di L1 ed L2 è: L1 * L2 = {w|w=w1w2, w1 compreso L1, w2 compreso L2}
+ + L'iterazione di L1 (chiusura riflessiva transitiva di L1 rispetto concatenazione) è: L1* = {w | w = w1w2..wn, n>=0 e per ogni i: wi compreso Li}
+ + Complemento di L1 è: NOT L1 = X* -L1
+ + L'intersezione di L1 ed L2 è:  L1 n L2 = {w|w compreso L1  ^  w compreso L2 }
+
+- Potenza di un linguaggio= Sia L un linguaggio definito su un alfabeto X, dicesi potenza n-esima di L, si denota con L^n, n>=0, il seguente linguaggio:
+ + L^n {lambda} con n=0 
+ + L^n = L^n-1 * L altrimenti posto L^+ = unione di i>=1 L^i
+Si ha; L* = {lambda} u L^+ = L^0 u L^+ = U L^i, i>=0
+
+-Proprietà di chiusura delle classi di linguaggi= 
+ + L linguaggio definito su X <=> L sott.proprio X* <=> L compreso 2^X*
+ + Lgotico classe di linguaggi su X <=> Lgotico sott.proprio 2^X* <=> Lgotico compreso 2^2^X*
+
+-Definizione di chiusura= Sia Lgotico una classe di linguaggi su X.
+ + Sia alfa un'operazione binaria sui linguaggi di Lgotico: Alfa : 2^X* X 2^X* -> 2^X*,    (L1,L2) |-> alfa(L1,L2)
+ + Sia beta un'operazione unaria sui linguaggi di Lgotico: Beta: 2^X* -> 2^X*,   L |-> Beta(L)
+ Lgotico è chiusa rispetto ad alfa <=> per ogni L1,L2 compreso Lgotico : alfa(L1,L2) comrpeso lgotico
+ Lgotico è chiusa rispetto a beta <=> per ogni L1 compreso Lgotico : Beta(L1) comrpeso lgotico
+
+-Teorema di chiusura= La classe dei linguaggi di tipo i = 0,1,2,3 è chiusa rispetto alle operazioni di unione, concatenazione ed iterazione.
+
+-Stringa riflessa= Sia w una parola su un alfabeto X = {x1,x2,...,xk}, w= xi1xi2...xin-1 xin. Dicesi stringa riflessa di w la stringa: w^R = xin xin-1 .... xi2 xi1
+
+-Operazione di riflessione= Sia w una parola su un alfabeto X = {x1,x2,...,xk} e sia w^R la stringa riflessa di w. L'operazione che trasforma w in w^R è detta operazione di riflessione.
+
+-Parola palindromica= Un palindromo è una parola la cui lettura a ritroso riproduce la parola di partenza:  w palindromo <=> w = w^R.
+
+-Teorema= sia w una parola su un alfabeto X. w è palindromo se e solo se w= alfa x alfa^R, x compreso X u {lambda}
+
+CAPITOLO 6
+
+- Automa/Accettatore a stati finiti (FSA)= Sia X un alfabeto, un automa a stati finiti è una quadrupla: M=(Q,δ,q0,F) ove:
+ + X è detto alfabeto di ingresso;
+ + Q è un insieme finito e non vuoto di stati;
+ + δ è una funzione da in Q, detta funzione di transizione: δ: Q x X -> Q
+ + q0 è lo stato iniziale;
+ + F sott.propr Q è l'insieme degli stati di accettazione o finali.
+
+-Grafo degli stati/diagramma di transizione/diagramma di stato=  rappresentazione grafica di un FSA in cui:
+ + ogni stato q compreso Q è rappr. da un cerchio (nodo) con etichetta q;
+ + lo stato iniziale (nodo q0) ha un arco orientato entrante libero (non proviene da nessun altro nodo);
+ + per ogni stato q compreso Q e per ogni simbolo x compreso X, se delta (q,x) = q' esiste un arco orientato etichettato con x uscente dal nodo q ed entrante nel nodo q'.
+
+-Tavola di transizione= può rappresentare la FSA, una tabella in cui ci sono gl istati sulle righe e i simboli dell'alfabeto in ingresso sulle colonne
+
+- δ* per FSA= Dato un FSA M = (Q,δ,q0,F) con alfabeto di ingresso X, definiamo per induzione la funzione: δ*:Q x X* -> Q, dove δ*(q,w) per q compreso Q e w compreso X*, sia lo stato in cui
+M si porta avendo in ingresso la parola w su X e partendo dallo stato q.
+δ*(q,lamda) = q;
+δ* (q,wx) = δ (δ* (q,w),x)       per ogni q compreso Q, x compreso X, w compreso X*.
+
+-Parola accettata FSA= Sia  M = (Q,δ,q0,F) un FSA con alfabeto in ingresso X  una parola w compreso X* è accettata da M se partendo da q0, lo stato q in cui l'automa si porta
+alla fine della sequenza di ingresso w è uno stato finale.
+
+-Linguaggio accettato FSA= Sia M = (Q,δ,q0,F) un FSA con alfabeto di ingresso X, il linguaggio accettato da M è il seguente sotto insieme di X*: 
+ + T(M) = {w compreso X* | δ* (q0,w) comrpeso F} - insieme delle parole accettate da M.
+
+-FSA equivalenti= Sia M1 = (Q1,δ1,q1,F1) ed M2 = (Q2,δ2,q2,F2) due FSA di alfabeto di ingresso X. M1 ed M2 si dicono equivalenti se:
+ + T(M1) = T(M2)
+
+-Linguaggi a stati finiti= Dato un alfabeto X, un linguaggio L su X è un linguaggio a stati finiti se esiste un FSA M con alfabeto di ingresso X t.c. L= T(M)
+
+-Classe dei linguaggi FSA= Lgotico FSL = {L compreso 2^X* | EsisteM, M è un FSA : L = T(M)} 
+
+-Automa/accettatore a stati finiti non deterministico(NDA) = Un NDA con alfabeto di ingresso X è una quadrupla M=(Q,δ,q0,F) ove:
+ + Per Q,q0 e F valgono le stesse cose di FSA;
+ + δ: Q x X -> 2^Q è la funzione di transizione che assegna ad ogni coppia (q,x) un insieme δ (q,x) sott.propr Q di possibili stati successivi.
+
+-δ* per NDA= Dato un NDA M=(Q,δ,q0,F) con alfabeto X, definiamo per induzione la funzione δ*: 2^Q x X*-> 2^Q
+ + δ*(p,lambda) = p
+ + δ*(p,wx) =  	U δ(q,x)                          per ogni p compreso 2^Q (p sott. Q) x compreso X w compreso X*
+                       q compreso δ* (p,w)
+
+-Parola accettata NDA = Sia  M = (Q,δ,q0,F) un NDA con alfabeto di ingresso X. una parola w compreso X* è accettata da M se, partendo dallo stato iniziale q0, esiste
+almeno un modo per M di portarsi in uno stato di accettazione alla fine della sequenza di ingresso w.
+
+-Linguaggio accettato NDA= Sia M = (Q,δ,q0,F) un NDA con alfabeto di ingresso X, il linguaggio accettato da M è l'insieme delle parole su X accettate da M:
+ +T(M) = { x compreso X* | δ* ({q0},w) n F != 0}
+
+-NDA Equivalenti = Siano M1 = (Q1,δ1,q1,F1) ed M2 = (Q2,δ2,q2,F2) due NDA di alfabeto di ingresso X. M1 ed M2 si dicono equivalenti se: T(M1) = T(M2)
+
+-Classe dei linguaggi NDA= LgoticoNDL = { L compreso 2^X* | Esiste M, M è un NDA : L=T(M) }
+
+Teorema= Le classi dei linguaggi Lgotico FSL e Lgotico NDL sono equivalenti.
+
+CAPITOLO 7
+
+-Linguaggio regolare= Sia X un alfabeto, un linguaggio L sott.proprio X* è regolare se:
+ +L è finito: |L| = k , k intero;
+ +L può essere ottenuto per induzione utilizzando una delle seguenti op:
+    + L = L1 u L2 con L1 ,L2 regolari;
+    + L = L1 per L2 con L1,L2 regolari;
+    + L = L1*, con L1 regoalre;                            0 e {lambda} sono regolari
+
+-Espressioni regolari= Sia X un alfabeto una stringa R di alfabeto X u  {lambda,+,*,., 0, (,)} con (X n {lambda,+,*,., 0, (,)}= 0 ) è una espressione regolare
+di alfabeto X se e solo se vale una delle seguenti condizioni:
+ + R = 0
+ + R = lambda
+ + R= a per ogni a compreso X
+ +  R = (R1 + R2) con R1,R2 espressioni regolari di alfabeto X
+ + R = (R1 per R2) con R1,R2 espressioni regolari di alfabeto X
+ + R = (R1)* con R1espressioni regolari di alfabeto X
+Ad ogni espressione regolare corrisponde un linguaggio regolare S(R) definito
+
+-Classe deo linguaggio REG= Lgotico REG = {L compreso 2^X* | Esiste R compreso R gotico; L = S(R)}
+
+-Espressioni regolari equivalenti= Due espressioni regolari R1 e R2 su X sono equivalenti se e solo se S(R1) = S(R2)
+
+-Proprietà delle espressioni regolari= 
++ Ass: (R1+R2) + R3 = R1 + (R2 +R3) = R1 + R2 + R3
++ Comm: R1 + R2 = R2 + R1
++ 0 El. neutro +: R1 + 0 = 0 + R1 = R1
++ Idempotenza: R1 + R1 = R1
++ Prop.ass per: (R1 * R2) * R3 = R1 *  (R2 * R3) = R1 * R2 * R3
++ R1 * R2 != R2 * R1
++ lambda El. neutro *: R1 * lambda = lambda *  R1 = R1
++ 0 El. assorbente *: R1 * 0 = 0 *  R1 = 0
++ distributiva *  sinistra : R1 * (R2+R3) = (R1*R2) + (R1 * R3) + distributiva *  destra : (R1 + R2) *R3 = (R1*R3) + (R2 * R3)
++ (R1)* = (R1)*  * (R1)* = ((R1)*)* = (lambda +R1)*
++ (0)* = (lambda)* = lambda.
++ (R1)* = lambda + R1 + R1^2 + ... + R1^n + (R1^n+1 * R1*) caso particolare: (R1)* = lambda + R1 * R1* = lambda R1* * R1
++ (R1 + R2)* = (R1* + R2*)* = (R1* * R2*)* = (R1* * R2)* * R1* = R1* * (R2 * R1*)*
++ (R1 + R2)* != R1* + R2*
++ R1* * R1 = R1 * R1* 
++ R1 * (R2 * R1)* = (R1 * R2)* * R1
++ (R1* * R2)* = lambda + (R1 + R2)* * R2
++ (R1 * R2*)* = lambda + R1* (R1 + R2)*
+Importante!
++ R1 = R2 * R1 + R3 se e solo se R1 = R2* * R3
+ + R1 = R1 * R2 + R3 se e solo se R1 = R3 * R2*
+
+-Teorema di kleene= Equivalenza tra Linguaggi lineari destri, linguaggi a stati finiti e linguaggi regolari
+ Abbiamo fatto Lgotico3 = LgoticoFSL    (e viceversa soltanto)
+
+-Pumping lemma per linguaggi regolari= Sia L= T(M) un linguaggio regolare con M = (Q,δ,q0,F) un automa a stati finiti, allora Esiste n= |Q| t.c. 
+per ogniz compreso L, |z| >= n; z = uvw e:
+ +  |uv| <= n
+ +  v != lambda
+ + uv^iw compreso L, per ogni  i>=0
+
+CAPITOLO 8
+
+-Compilatore= Traduce il programma sorgente in programma oggetto, Esegue:
+ +Analisi del programma sorgente;  (diviso in analizzatore lessicale, sintattico e semantico)
+ +Sintesi del programma oggetto;  (diviso in generatore di codice, ottimizatore di codice)
+
+-Analizzatore lessicale(scanner)=  separa il programma sorgente in parti chiamate token (nomi delle variabili, operatori, label).
+ +Input: Programma sorgente, esamina il programma per individuare i token classificando le parole chiave, identificatori, operatori, cost, ecc..
+ Ogni classe di token è dato da un numero unico che la identifica .
+ Il token è una stringa di caratteri, è memorizzato in una tabella.
+ +Output: lista di token.
+
+-Analizzatore sinstattico (parser)= 
+ +Input: lista di token, individua la struttura sintattica delal stringa a partire dal programma sorgente sotto forma di token.
+   Identifica quindi espressioni, istruzioni, procedure.
+ +Output: Albero sintattico.
+
+-Analizzatore semanticco= 
+ +Input: Albero sintattico generato dal parser.
+ Si compone di due fasi principali:
+  +Controlli statici: quando riconosce gli operatori aritmetici, invoca una routine semantica che indica le azioni da svolgere facendo un controllo se hanno stesso tipo / valore ecc..
+  + Generazione di una rappresentazione intermedia (IR), Produce una forma intermedia di codice sorgente dove:
+     Rimuove dall'albero alcune delle categorie intermedie e mantiene solo la struttura essenziale (albero sintattico astratto): i nodi sono i token, le foglie sono gli operandi, i nodi intermedi operatori.
+     Qui può esserci un ottimizatore del codice: eliminazione di sotto-espressioni comuni/ripetute.
++Output: Albero arricchito con informazioni sui vincoli sintattici contestuali.
+
+-Generatore di codice=
+Trasla la forma intermedia in linguaggio assembler o macchina.
+ + Allocazione della memoria: può essere allocata staticamente oppure è uno stack o heap la cui dimensione cambia durante l’esecuzione;
+ + Allocazione dei registri: poiché l’accesso ai registri è più rapido dell’accesso alle locazioni di memoria, i valori cui si accede più spesso andrebbero mantenuti nei registri.
+ (S), 1(S), 2(S): accede al contenuto al top dello stack, ad una posizione successiva, a due etc..
+ @A: accede alla locazione il cui valore è puntato da A.
+
+-Ottimizatore di codice= 
+◼ Ottimizzazioni indipendenti dalla macchina: ad esempio la rimozione di istruzioni invarianti all’interno di un loop, fuori dal loop, etc.
+◼ Ottimizzazioni dipendenti dalla macchina: ad esempio ottimizzazione dell’uso dei registri.
+Scanner e parser di solito vengono eseguiti in sequenza, in ordine, ma lo scanner può essere chiamato dal parser ogni volta che 	necessita un nuovo token per ottimizzare il tutto.
+
+Altri aspetti importanti della compilazione:
+1. Error Detection e Recovery;
+2. Le Tabelle dei Simboli prodotte dai vari moduli;
+3. La Gestione della Memoria implicata da alcuni costrutti del linguaggio di alto livello.
+
+-Linking e caricamento=
+Il programma oggetto prodotto dal compilatore contiene una serie di riferimenti esterni, sono risolti dal LINKER.
+◼ Il programma è rilocabile: può essere allocato in diverse zone di memoria cambiando indirizzo ind
+(indirizzamento relativo).
+◼ Fase di caricamento compiuta dal LOADER che assegna un valore numerico all’indirizzo ind, trasformando gli indirizzi relativi in assoluti.
+
+CAPITOLO 9
+-costant table= i valori delle costanti (token) dello scanner sono memorizzati nella costant table.
+-Symbol table= i nomi delle variabili (token) dello scanner sono memorizzati nella symbol table.
+
+-Compiti scanner= 
++ Eliminare spazi bianchi, commenti, ecc;
++ Isolare il prossimo token dalla sequenza di caratteri in input;
++ Isolare identificatori e parole-chiave;
++ Generare la symbol-table
++ I token possono essere descritti in diversi modi. Spesso si utilizzano le grammatiche regolari o con gli automi a stati finiti.
+
+-Algoritmo Procedure SCAN (PROGRAM, LOOKAHEAD, CHAR, TOKEN, POS)
+Data la stringa sorgente PROGRAM, questo algoritmo restituisce il numero di rappresentazione interna del TOKEN successivo nella stringa.
+Se TOKEN rappresenta un identificatore, stringa o costante, la procedura restituisce anche la sua posizione numerica nella tabella POS.
+CHAR rappresenta il carattere corrente su cui si sta facendo l’analisi lessicale. 
+LOOKAHEAD è una variabile logica che ci dice se il simbolo in CHAR è stato usato nella chiamata precedente a SCAN.
+Un valore "false" denota che non è stato ancora controllato.
+-L’algoritmo utilizza le seguenti funzioni:
++ GET_CHAR(PROGRAM) che restituisce il prossimo carattere del programma sorgente;
++ INSERT(STRING,type) che inserisce un dato token STRING (se necessario) ed il suo tipo (cioè costante, stringa o variabile) nella tabella dei simboli;
++ KEYWORD(STRING) che restituisce il numero di rappresentazione interna del suo argomento se è una keyword, 0 altrimenti.
++ STRING contiene il token.corrente (nome di variabile, costante, stringa).
+Le variabili DIVISION, LEQ, NEQ, LTN, GEQ, GTN, EQ, LEFT, RIGHT, ADDITION, SUBTRACTION, MULIPLICATION, ASSIGNMENT, SEMICOLON,LITERAL, IDENTIFIER e CONSTANT 
+contengono i numeri interni di rappresentazione dei token /, <=, <>,<,>=, >, =, (, ), +, -,*, :=, ;, stringhe, identificatori e costanti rispettivamente.
+
+-Lex = un generatore di scanner utilizza espressioni regolari per specificare lo scanner, genera una tabella delle transizioni a stati finii
+e interpreta tale tabella.
+Il programma quindi simula l'automa a stati finiti ed esegue le funzioni associate con le azioni.
+Lex può essere usato in congiunzione con un parser (YACC) per eseguire sia analisi lessicale che sintattica.
+
+CAPITOLO 10
+
+- Tabelle dei simboli= Servono a: 
+ +Controllo della correttezza semantica (cs);
+ + aiuto nella generazione del codice.
+Contiene gli attributi ovvero: il tipo, il nome, la dimensione, l'indirizzo i quali sono determinati analizzando il codice sorgente.
+è inserita in memoria centrale e viene modificata dinamicamente.
+Una tavola o tabella è un tipo di dato astratto per rappresentare insiemi di coppie <chiave, attributi>
+
+-Operazioni sulle tavole= 
+ +inserimento di un elemento <Chiave, Attributi>, inserisci: tavola x chiave x attributi → tavola
+ + cancellazione di un elemento (nota la chiave),cancella: tavola x chiave → tavola
+ + verifica di appartenenza di un elemento, esiste: tavola x chiave → boolean
+ + ricerca di un elemento nella tavola, ricerca: tavola x chiave → attributi (più frequente e importante, obiettivo ottimizzarlo)
+
+-Creazione della tabella dei simboli= La TS è creata dall'analizzatore lessicale (scanner).
+
