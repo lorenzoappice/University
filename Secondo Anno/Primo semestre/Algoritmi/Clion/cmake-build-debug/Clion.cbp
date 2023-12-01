@@ -84,13 +84,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/TestMatrice.cpp">
+		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/TestStudente.cpp">
 			<Option target="Clion"/>
 		</Unit>
-		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/matrice.cpp">
+		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/esame.cpp">
 			<Option target="Clion"/>
 		</Unit>
-		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/matrice.h">
+		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/esame.h">
+			<Option target="Clion"/>
+		</Unit>
+		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/studente.cpp">
+			<Option target="Clion"/>
+		</Unit>
+		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/studente.h">
 			<Option target="Clion"/>
 		</Unit>
 		<Unit filename="C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/CMakeLists.txt">

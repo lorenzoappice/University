@@ -1,5 +1,5 @@
-CMakeFiles/Clion.dir/studente.cpp.obj: \
- C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\studente.cpp \
+CMakeFiles/Clion.dir/TestStudente.cpp.obj: \
+ C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\TestStudente.cpp \
  C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\studente.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \

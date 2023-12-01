@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/TestMatrice.cpp" "CMakeFiles/Clion.dir/TestMatrice.cpp.obj" "gcc" "CMakeFiles/Clion.dir/TestMatrice.cpp.obj.d"
-  "C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/matrice.cpp" "CMakeFiles/Clion.dir/matrice.cpp.obj" "gcc" "CMakeFiles/Clion.dir/matrice.cpp.obj.d"
+  "C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/TestStudente.cpp" "CMakeFiles/Clion.dir/TestStudente.cpp.obj" "gcc" "CMakeFiles/Clion.dir/TestStudente.cpp.obj.d"
+  "C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/esame.cpp" "CMakeFiles/Clion.dir/esame.cpp.obj" "gcc" "CMakeFiles/Clion.dir/esame.cpp.obj.d"
+  "C:/Users/appic/OneDrive/Desktop/University/Secondo Anno/Primo semestre/Algoritmi/Clion/studente.cpp" "CMakeFiles/Clion.dir/studente.cpp.obj" "gcc" "CMakeFiles/Clion.dir/studente.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

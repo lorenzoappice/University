@@ -1,6 +1,6 @@
-CMakeFiles/Clion.dir/studente.cpp.obj: \
- C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\studente.cpp \
- C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\studente.h \
+CMakeFiles/Clion.dir/TestEsame.cpp.obj: \
+ C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\TestEsame.cpp \
+ C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\esame.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -142,5 +142,4 @@ CMakeFiles/Clion.dir/studente.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_ios.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
- C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
- C:\Users\appic\OneDrive\Desktop\University\Secondo\ Anno\Primo\ semestre\Algoritmi\Clion\esame.h
+ C:/Program\ Files/JetBrains/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc
