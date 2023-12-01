@@ -1,52 +1,35 @@
-#include <iostream>
-matrice::matrice(int c, int r);
-tipoelem leggimatrice(int i, int j);
-void scrivimatrice(int i, int j, tipoelem valore);
+#ifndef ESERCITAZIONE_2023_10_13_MATRICE_H
+#define ESERCITAZIONE_2023_10_13_MATRICE_H
+
+
+typedef double tipoElemento;
 
 class matrice {
-    public:
-        matrice(int,int); //costruttore
-        tipoelem leggimatrice(int,int);
-        void scrivimatrice(int,int,tipoelem);
-        void prodottoScalare(double scalare);
-    private:
-        int righe;
-        int colonne;
-        tipoelem **elementi;
+public:
+    matrice(int numeroRighe, int numeroColonne); /* costruttore */
 
-}
+    int getRighe() const;
+    int getColonne() const;
 
-//costruttore
-matrice::matrice(int c, int r) {
-    colonne = c;
-    righe = r;
-    //allocazione dinamica della matrice
-    int i;
-    elementi = new tipoelem*[righe];
-    for (i=0; i<righe; i++) {
-        elementi[i] = new tipoelem[colonne];
-    }
-    //inizializzazione degli elementi
-    for (i=0; i<righe; i++) {
-        for (int j=0; j<colonne; j++) {
-            elementi[i][j] = i+j;
-        }
-    }
-    //oppure
-    /*
-        for (i=0; i<righe; i++) {
-            for (int j=0; j<colonne; j++) {
-                scrivimatrice(i,j,i+j)
-            }
-        }
-    */
-}
 
-tipoelem leggimatrice(int i, int j) {
-    return elementi[i][j];
-}
+    tipoElemento leggiMatrice(int riga, int colonna);
+    void scriviMatrice(int riga, int colonna, tipoElemento elementoGenerico);
 
-void scrivimatrice(int i, int j, tipoelem valore) {
-    elementi[i][j] = valore;
-}
+    void prodottoScalare(double scalare);
+    matrice trasposta();
+    void prodotto(matrice primaMatrice, matrice secondaMatrice);
 
+    void stampareMatrice();
+    void riempireMatrice();
+
+    ~matrice();
+
+private:
+    int righe;
+    int colonne;
+    tipoElemento **elementi;
+
+};
+
+
+#endif //ESERCITAZIONE_2023_10_13_MATRICE_H

@@ -3,41 +3,39 @@ using namespace std;
 
 int main () {
     studente s;
-    char * n;
-    char * c;
+    string n;  // Utilizzare std::string invece di array di caratteri
+    string c;  // Utilizzare std::string invece di array di caratteri
     int k = 2;
-    studente corso [k];
+    studente corso[k];
     int mat;
     int e;
     int val = 0;
-    for (int i=0;i<k;i++) {
-    while (val != 0) {
-    cout << "Inserisci il nome dello studente:" << endl;
-    cin >> n;
-    val = setNome(&s,n);
-    }
-    while (val != 0) {
-       cout << "Inserisci il Cognome dello studente:" << endl;
-       cin >> c;
-       val = setCognome(&s,c);
-    }
-    while (val != 0) {
-        cout << "inserisci la matricola dello studente:" << endl;
+    int i = 0;
+    while (i < k) {
+        cout << "Inserisci il nome dello studente:" << endl;
+        cin >> n;
+        setNome(&s, n);
+
+        cout << "Inserisci il Cognome dello studente:" << endl;
+        cin >> c;
+        setCognome(&s, c);
+
+        cout << "Inserisci la matricola dello studente:" << endl;
         cin >> mat;
-        val = setMatricola(&s,mat);
-    }
-    while (val !=0) {
-        cout << "inserisci l'eta dello studente:" << endl;
+        setMatricola(&s, mat);
+
+        cout << "Inserisci l'eta dello studente:" << endl;
         cin >> e;
-        val = setEta(&s,e);
+        setEta(&s, e);
+        corso[i] = s;
+        i++;
     }
-    corso[i] = s;
-    }
-    for (int i=0;i<k;i++) {
-        cout << "Nome: " << getNome(&corso[i]) << endl;
-        cout << "Cognome: " << getCognome(&corso[i]) << endl;
-        cout << "Matricola: " << getMatricola(&corso[i]) << endl;
-        cout << "Eta: " << getEta(&corso[i]) << endl;
+
+    for (int j = 0; j < k; j++) {
+        cout << "Nome: " << getNome(&corso[j]) << endl;
+        cout << "Cognome: " << getCognome(&corso[j]) << endl;
+        cout << "Matricola: " << getMatricola(&corso[j]) << endl;
+        cout << "Eta: " << getEta(&corso[j]) << endl;
     }
     return 0;
 }

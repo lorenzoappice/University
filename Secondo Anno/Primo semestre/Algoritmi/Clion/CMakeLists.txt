@@ -3,4 +3,5 @@ project(Clion)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Clion main.cpp)
+add_executable(Clion TestMatrice.cpp
+        matrice.cpp)
