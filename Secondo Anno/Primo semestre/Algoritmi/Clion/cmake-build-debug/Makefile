@@ -128,77 +128,53 @@ Clion/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/build
 .PHONY : Clion/fast
 
-TestStudente.obj: TestStudente.cpp.obj
-.PHONY : TestStudente.obj
+TesterLista.obj: TesterLista.cpp.obj
+.PHONY : TesterLista.obj
 
 # target to build an object file
-TestStudente.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TestStudente.cpp.obj
-.PHONY : TestStudente.cpp.obj
+TesterLista.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TesterLista.cpp.obj
+.PHONY : TesterLista.cpp.obj
 
-TestStudente.i: TestStudente.cpp.i
-.PHONY : TestStudente.i
+TesterLista.i: TesterLista.cpp.i
+.PHONY : TesterLista.i
 
 # target to preprocess a source file
-TestStudente.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TestStudente.cpp.i
-.PHONY : TestStudente.cpp.i
+TesterLista.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TesterLista.cpp.i
+.PHONY : TesterLista.cpp.i
 
-TestStudente.s: TestStudente.cpp.s
-.PHONY : TestStudente.s
+TesterLista.s: TesterLista.cpp.s
+.PHONY : TesterLista.s
 
 # target to generate assembly for a file
-TestStudente.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TestStudente.cpp.s
-.PHONY : TestStudente.cpp.s
+TesterLista.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/TesterLista.cpp.s
+.PHONY : TesterLista.cpp.s
 
-esame.obj: esame.cpp.obj
-.PHONY : esame.obj
+lista.obj: lista.cpp.obj
+.PHONY : lista.obj
 
 # target to build an object file
-esame.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/esame.cpp.obj
-.PHONY : esame.cpp.obj
+lista.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/lista.cpp.obj
+.PHONY : lista.cpp.obj
 
-esame.i: esame.cpp.i
-.PHONY : esame.i
-
-# target to preprocess a source file
-esame.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/esame.cpp.i
-.PHONY : esame.cpp.i
-
-esame.s: esame.cpp.s
-.PHONY : esame.s
-
-# target to generate assembly for a file
-esame.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/esame.cpp.s
-.PHONY : esame.cpp.s
-
-studente.obj: studente.cpp.obj
-.PHONY : studente.obj
-
-# target to build an object file
-studente.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/studente.cpp.obj
-.PHONY : studente.cpp.obj
-
-studente.i: studente.cpp.i
-.PHONY : studente.i
+lista.i: lista.cpp.i
+.PHONY : lista.i
 
 # target to preprocess a source file
-studente.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/studente.cpp.i
-.PHONY : studente.cpp.i
+lista.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/lista.cpp.i
+.PHONY : lista.cpp.i
 
-studente.s: studente.cpp.s
-.PHONY : studente.s
+lista.s: lista.cpp.s
+.PHONY : lista.s
 
 # target to generate assembly for a file
-studente.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/studente.cpp.s
-.PHONY : studente.cpp.s
+lista.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Clion.dir\build.make CMakeFiles/Clion.dir/lista.cpp.s
+.PHONY : lista.cpp.s
 
 # Help Target
 help:
@@ -209,15 +185,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Clion
-	@echo ... TestStudente.obj
-	@echo ... TestStudente.i
-	@echo ... TestStudente.s
-	@echo ... esame.obj
-	@echo ... esame.i
-	@echo ... esame.s
-	@echo ... studente.obj
-	@echo ... studente.i
-	@echo ... studente.s
+	@echo ... TesterLista.obj
+	@echo ... TesterLista.i
+	@echo ... TesterLista.s
+	@echo ... lista.obj
+	@echo ... lista.i
+	@echo ... lista.s
 .PHONY : help
 
 

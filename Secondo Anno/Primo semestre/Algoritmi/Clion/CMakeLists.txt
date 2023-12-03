@@ -3,8 +3,7 @@ project(Clion)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Clion studente.h
-        studente.cpp
-        TestStudente.cpp
-        studente.h
-        esame.cpp)
+add_executable(Clion
+        lista.cpp
+        lista.h
+        cmake-build-debug/TesterLista.cpp)
