@@ -1,0 +1,9 @@
+Implementare un interprete per un linguaggio di programmazione, 
+in cui ogni programma consista di una singola operazione aritmetica, 
+preceduta da una sequenza di istruzioni di assegnamento in cui possono comparire espressioni
+aritmetiche che coinvolgono interi e variabili in cui nome è dato da una singola lettera minuscola.
+Per esempio dato l'ingresso:
+ (x = 1)
+ (y = (x + 1))
+ (((x + y) * 3) + (4 * x))
+il programma dovrebbe dare in uscita il valore 13.

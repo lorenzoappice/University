@@ -1,0 +1,18 @@
+Progettare ed implementare un calsse MultipleStack che fornisca la gestione di m stack. La dichiarazione della classe dovrebbe essere simile a qualcosa del genere:
+class MultipleStack
+{
+    // ...
+public:
+    MultipleStack (unsigned int);
+    void Push (Object&, unsigned int);
+    Object& Pop (unsigned int);
+    // ...
+};
+Il costruttore ha in input un argomento di tipo intero che specifica il numero di stack da gestire
+la funzione Push ha due argomenti.
+ Il primo è l'oggetto da inserire e il secondo specifica lo stack in cui inserirlo
+la funzione Pop ha in input un solo intero che specifica lo stack da cui eliminare un oggetto
+Scegliere una delle seguenti implementazioni:
+tenere tutti gli stack in un solo array
+usare un array di oggetti di tipo Stack
+Usare una lista collegata di oggetti di tipo Stack

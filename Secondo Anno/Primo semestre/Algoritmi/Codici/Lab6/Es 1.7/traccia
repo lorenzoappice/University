@@ -1,0 +1,15 @@
+Convertire un'espressione aritmetica da notazione infissa alla corrispondente notazione postfissa utilizzando una coda come risultato della conversione.
+ espressione               pila            coda
+ 35 + 17 * (40 - 9) - 7
+ + 17 * (40 - 9) - 7                       35
+ 17 * (40 - 9) - 7         +               35
+ * (40 - 9) - 7            +               17 35
+ (40 - 9) - 7              + *             17 35
+ 40 - 9) - 7               + * (           17 35
+ - 9) - 7                  + * (           40 17 35
+ 9) - 7                    + * ( -         40 17 35
+ ) - 7                     + * ( -         9 40 17 35
+ - 7                       + * (           - 9 40 17 35
+ 7                         -               + * - 9 40 17 35
+                           -               7 + * - 9 40 17 35
+                                           - 7 + * - 9 40 17 35

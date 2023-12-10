@@ -31,13 +31,23 @@ public:
 
 
     void inserisciInCoda(T valore) {
-        Nodo<T>* nuovoNodo = new Nodo<T>(valore);
+        Nodo<T> *nuovoNodo = new Nodo<T>(valore);
         if (coda == nullptr) {
             testa = nuovoNodo;
             coda = nuovoNodo;
         } else {
             coda->successivo = nuovoNodo;
             coda = nuovoNodo;
+        }
+    }
+    void inserisciInTesta(T valore) {
+        Nodo<T>* nuovoNodo = new Nodo<T>(valore);
+        if (coda == nullptr) {
+            testa = nuovoNodo;
+            coda = nuovoNodo;
+        } else {
+            testa->successivo = nuovoNodo;
+            testa = nuovoNodo;
         }
     }
 
@@ -68,6 +78,37 @@ public:
             delete corrente;
         }
     }
+
+    void rimuoviElementoCoda(T valore) {
+        Nodo<T>* corrente = testa;
+        Nodo<T>* precedente = nullptr;
+
+        // Cerca l'elemento nella coda
+        while (corrente != nullptr && corrente->dato != valore) {
+            precedente = corrente;
+            corrente = corrente->successivo;
+        }
+        // Se l'elemento è stato trovato, rimuovilo
+        if (corrente != nullptr) {
+            if (precedente != nullptr) {
+                // L'elemento da rimuovere non è l'ultimo
+                precedente->successivo = corrente->successivo;
+            }
+            else
+            {
+                // L'elemento da rimuovere è l'ultimo
+                testa = corrente->successivo;
+            }
+            // Se l'elemento rimosso è anche l'ultimo, aggiorna il puntatore della coda
+            if (corrente == coda) {
+                coda = precedente;
+            }
+            // Dealloca la memoria dell'elemento rimosso
+            delete corrente;
+        }
+    }
+
+
     int lunghezza() const {
         int dim = 0;
         Nodo<T>* corrente = testa;

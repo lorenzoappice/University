@@ -1,5 +1,9 @@
 #include "coda.h"
 using namespace std;
+
+/*Il tipo di dato dequeue (double ended queue) è una sequenza modificabile ad entrambi gli estremi,
+ * in cui è possibile inserire un emlemento in testa o inserirlo in fondo, e cancellare un
+ * elemento dalla testa o cancellarlo dal fondo. Si fornisca una realizzazione in C++ (operatori con tempo O(1)).*/
 int main() {
     // Creazione di una coda di interi
     Coda<int> codaDiInteri;
@@ -18,7 +22,7 @@ int main() {
     codaPositiva.stampaCoda();
 
     // Rimozione di un elemento dalla coda
-    codaDiInteri.rimuoviElemento(20);
+    codaDiInteri.rimuoviElementoCoda(20);
 
     // Stampa della coda dopo la rimozione
     cout << "Coda di interi dopo la rimozione: ";
