@@ -86,9 +86,16 @@ public:
     }
 
     void clear() {
-
-
+        Nodo<T>* corrente = testa;
+        Nodo<T>* prossimo = nullptr;
+        while (corrente) {
+            prossimo = corrente->next;
+            delete corrente;
+            corrente = prossimo;
+        }
+        testa = nullptr;
     }
+
     int num_elements(int pi,int pf) const {
         Nodo<T>* current = getNodeAtIndex(pi);
         int num_elements=0;
@@ -106,66 +113,68 @@ public:
         elemp1->dato = elemento2;
         elemp2->dato = elemento1;
     }
-    void move_min_max() {
-        T min = find_min();
-        T max = find_max();
-        Nodo<T>* corrente = testa;
-        Nodo<T>* precedente = nullptr;
-        Nodo<T>* minNode = nullptr;
-        Nodo<T>* maxNode = nullptr;
+
+
+    void toglicomune(list &secondaLista) {
+        Nodo<T> *corrente1 = testa;
+        Nodo<T> *precedente1 = nullptr;
+        Nodo<T> *corrente2 = secondaLista.testa;
+        Nodo<T> *successivo1 = nullptr;
+
+        while (corrente1 && corrente2) {
+            successivo1 = corrente1->next;
+            if (corrente1->dato == corrente2->dato) {
+                // Elemento comune trovato, rimuovilo dalla lista
+                if (precedente1) {
+                    precedente1->next = successivo1;
+                    delete corrente1;
+                    corrente1 = successivo1;
+                } else {
+                    // Elemento comune è in testa, aggiorna la testa
+                    testa = successivo1;
+                    delete corrente1;
+                    corrente1 = successivo1;
+                }
+            } else {
+                precedente1 = corrente1;
+                corrente1 = successivo1;
+            }
+            // Avanza nella seconda lista solo se non c'è stato un match
+            if (corrente1 && corrente1->dato != corrente2->dato) {
+                corrente2 = corrente2->next;
+            }
+        }
+    }
+    void insertionSort() {
+        if (!testa || !testa->next) {
+            // La lista è vuota o contiene un solo elemento, già ordinata
+            return;
+        }
+
+        Nodo<T>* corrente = testa->next;
 
         while (corrente) {
-            if (corrente->dato == min) {
-                minNode = corrente;
-            } else if (corrente->dato == max) {
-                maxNode = corrente;
+            Nodo<T>* successivo = corrente->next;
+
+            // Trova la posizione corretta all'interno della lista ordinata
+            Nodo<T>* temp = testa;
+            Nodo<T>* precedente = nullptr;
+
+            while (temp != corrente && corrente->dato > temp->dato) {
+                precedente = temp;
+                temp = temp->next;
             }
-            corrente = corrente->next;
+
+            // Se la posizione corretta è diversa dalla posizione corrente
+            if (precedente != corrente) {
+                // Scambia i dati tra i nodi
+                T tempDato = corrente->dato;
+                corrente->dato = precedente->dato;
+                precedente->dato = tempDato;
+            }
+
+            corrente = successivo;
         }
-        // Spostamento del minimo all'inizio
-        if (minNode && minNode != testa) {
-            corrente = testa;
-            while (corrente->next != minNode) {
-                corrente = corrente->next;
-            }
-            corrente->next = minNode->next;
-            minNode->next = testa;
-            testa = minNode;
-        }
-        // Spostamento del massimo alla fine
-        if (maxNode) {
-            corrente = testa;
-            while (corrente->next) {
-                corrente = corrente->next;
-            }
-            if (maxNode != corrente) {
-                precedente->next = maxNode->next;
-                corrente->next = maxNode;
-                maxNode->next = nullptr;
-            }
-        }
-    }
-    T find_min() const {
-        Nodo<T>* corrente = testa;
-        T min = corrente->dato;
-        while (corrente) {
-            if (corrente->dato >= min) {
-                min = corrente->dato;
-            }
-            corrente = corrente->next;
-        }
-        return min;
     }
 
-    T find_max() const {
-        Nodo<T>* corrente = testa;
-        T max= corrente->dato;
-        while (corrente) {
-            if (corrente->dato <= max) {
-                max = corrente->dato;
-            }
-            corrente = corrente->next;
-        }
-        return max;
-    }
 };
