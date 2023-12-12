@@ -6,7 +6,7 @@ CREATE TABLE redazioni (
 idRedazione char(4) PRIMARY KEY,
 nomeComitato char(10),
 citta char(8),
-indirizzoWeb varchar(100)   -- ho lasciato var char per questo colonne perchè la in genere gli indirizzi web variano molto per dimensione
+indirizzoWeb varchar(100)   -- ho lasciato var char per questa colonna perchè genere gli indirizzi web variano molto per dimensione
 );
 
 CREATE TABLE testate (
@@ -26,7 +26,7 @@ via char(15),
 citta char(15),
 provincia char(2),
 CAP char(5),
-email varchar(50)  -- ho lasciato var char per questo colonne perchè la in genere la mail varia molto per dimensione
+email varchar(50)  -- ho lasciato var char per questa colonna perchè genere la mail varia molto per dimensione
 );
 
 
@@ -88,18 +88,18 @@ REFERENCES inserzioni (codice)
 );
 
 CREATE TABLE privati (
-idPrivato char(3) PRIMARY KEY,
+idPrivato char(6) PRIMARY KEY,  -- ho notato che idPrivato qui era di 3 char mentre in inspriv è di 6 quindi ho deciso di lasciare 6 in privati.
 cognome char(10),
 nome char(8),
 via char(15),
 citta char(15),
 provincia char(2),
 CAP char(5),
-email varchar(50) -- ho lasciato var char per questo colonne perchè la in genere la mail varia molto per dimensione
+email varchar(50) -- ho lasciato var char per questa colonna perchè in genere la mail varia molto per dimensione
 );
 
 CREATE TABLE inspriv (
-idPrivato char(6) ,
+idPrivato char(6) ,     
 idInserzione char(6) ,
 PRIMARY KEY (idPrivato, idInserzione),
 FOREIGN KEY (idPrivato)
@@ -109,13 +109,14 @@ REFERENCES inserzioni (codice)
 );
 
 -- oltre a qualche errore di sintassi, non ho riscontrato problemi nella creazione delle tabelle con i rispettivi vincoli.
+
+
 INSERT INTO redazioni
 VALUES ('abc1','Comitato1','Roma','www.comitato1.it');
 INSERT INTO redazioni
-VALUES ('abc2','Comitato2','Milano','www.comitato2.it');
+VALUES ('abc2','Comitato2','Bari','www.comitato2.it');
 INSERT INTO redazioni
-VALUES ('abc3','Comitato3','Napoli','www.comitato3.it');
-SELECT * FROM redazioni;
+VALUES ('abc3','Comitato3','Lecce','www.comitato3.it');
 
 INSERT INTO testate
 VALUES ('abc1','Testata1','abc1');
@@ -123,13 +124,11 @@ INSERT INTO testate
 VALUES ('abc2','Testata2','abc2');
 INSERT INTO testate
 VALUES ('abc3','Testata3','abc3');
-SELECT * FROM testate;
 
 ALTER TABLE privati 
 MODIFY COLUMN nome char(30);
 ALTER TABLE privati 
 MODIFY COLUMN cognome char(30);
-DESCRIBE privati; 
 
 
 CREATE TABLE citta (
@@ -137,7 +136,6 @@ CAP char(5) PRIMARY KEY,
 citta char(15),
 provincia char(2)
 );
-DESCRIBE citta;
 
 /* "modificare le tabelle in cui è presente l'attributo città in modo che abbiano una chiave esterna alla tabella città al posto dei tre attributi separati";
    cancello prima gli attributi provincia e citta nelle altre tabelle e lascio la colonna CAP come chiave esterna
@@ -146,7 +144,9 @@ DESCRIBE citta;
 -- oppure se creare una nuova colonna idcitta che fa da chiave esterna a CAP in tabella citta. Ho optato per la prima soluzione.
 -- REDAZIONI
 ALTER TABLE redazioni
-DROP COLUMN citta;
+RENAME COLUMN citta TO CAP;
+ALTER TABLE redazioni
+MODIFY COLUMN CAP char(5);
 
 ALTER TABLE redazioni
 ADD COLUMN CAP char(5) AFTER nomeComitato;
@@ -182,10 +182,133 @@ ADD FOREIGN KEY (CAP)
 REFERENCES citta (CAP);
 
 /* inserire nel database tanti comitati di redazioni quante sono le testate di giornale inserite;
-inserire nel database un numero di persone che compongono i comitati di redazione, tenendo conto che qualche redattore può far parte di più comitati;
 modificare la tabella categorie in modo che la chiave primaria sia idCategoria anziché nomeCategoria;
 inserire le categorie e ognuna con un diverso numero di sottocategorie (es. affitti e vendite sono sottocategorie di case);
 inserire nelle tabelle almeno 10 inserzioni di privati e 10 inserzioni di aziende;
 verificare che i dati siano stati inseriti correttamente, in particolare fare interrogazioni semplici (scrivendo SELECT * FROM nomeTabella;) sulle tabelle in cui inserite i dati non appena avete finito l'inserimento;
 */
+INSERT INTO citta
+VALUES ('00100','Roma','RM'); 
+INSERT INTO citta
+VALUES ('00010','Bari','BA');
+INSERT INTO citta
+VALUES ('00001','Lecce','LE');
 
+INSERT INTO redattori 
+VALUES ('001','Rossi','Mario','Via Roma','00100','mariorossi@gmail.com');
+INSERT INTO redattori 
+VALUES ('002','Bianchi','Mario','Via Bari','00010','mariobianchi@gmail.com');
+INSERT INTO redattori 
+VALUES ('003','Gialli','Luca','Via Lecce','00001','gialliluca@gmail.com');
+
+INSERT INTO redazRedat
+VALUES ('abc1','001');
+INSERT INTO redazRedat
+VALUES ('abc3','001');
+INSERT INTO redazRedat
+VALUES ('abc2','002');
+INSERT INTO redazRedat
+VALUES ('abc1','002');
+INSERT INTO redazRedat
+VALUES ('abc3','003');
+
+/* modificare la tabella categorie in modo che la chiave primaria sia idCategoria anziché nomeCategoria; 
+   In questo alter table non ho capito se dovessi semplicemente cambiare il nomecategoria in IdCategoria oppure creare una colonna 
+   IdCategoria dentro categorie togliendo il pk da nomecategoria ed assegnarlo ad IdCategoria.
+   Ho scelto la prima opzione, ovvero rinomino nomecategoria in IdCategoria perchè non sono riuscito a fare la seconda opzione.
+*/
+ALTER TABLE categorie
+RENAME COLUMN nomeCategoria TO idCategoria;
+
+INSERT INTO categorie
+VALUES ('Case','Case');
+INSERT INTO categorie
+VALUES ('Affitti','Case');
+INSERT INTO categorie
+VALUES ('Vendite','Case');
+
+INSERT INTO categorie
+VALUES ('Moto','Moto');
+INSERT INTO categorie
+VALUES ('Benzina','Moto');
+INSERT INTO categorie
+VALUES ('Diesel','Moto');
+-- inserizioni per aziende
+INSERT INTO inserzioni  VALUES ('I00001', 'Descrizione inserzione azienda 1', 'Case');
+INSERT INTO inserzioni  VALUES ('I00002', 'Descrizione inserzione azienda 2', 'Affitti');
+INSERT INTO inserzioni  VALUES ('I00003', 'Descrizione inserzione azienda 3', 'Vendite');
+INSERT INTO inserzioni  VALUES ('I00004', 'Descrizione inserzione azienda 4', 'Moto');
+INSERT INTO inserzioni  VALUES ('I00005', 'Descrizione inserzione azienda 5', 'Benzina');
+INSERT INTO inserzioni  VALUES ('I00006', 'Descrizione inserzione azienda 6', 'Diesel');
+INSERT INTO inserzioni  VALUES ('I00007', 'Descrizione inserzione azienda 7', 'Moto');
+INSERT INTO inserzioni  VALUES ('I00008', 'Descrizione inserzione azienda 8', 'Benzina');
+INSERT INTO inserzioni  VALUES ('I00009', 'Descrizione inserzione azienda 9', 'Diesel');
+INSERT INTO inserzioni  VALUES ('I00010', 'Descrizione inserzione azienda 10', 'Case');
+-- inserizioni per i privati
+INSERT INTO inserzioni  VALUES ('P00001', 'Descrizione inserzione priv 1', 'Case');
+INSERT INTO inserzioni  VALUES ('P00002', 'Descrizione inserzione priv 2', 'Affitti');
+INSERT INTO inserzioni  VALUES ('P00003', 'Descrizione inserzione priv 3', 'Vendite');
+INSERT INTO inserzioni  VALUES ('P00004', 'Descrizione inserzione priv 4', 'Moto');
+INSERT INTO inserzioni  VALUES ('P00005', 'Descrizione inserzione priv 5', 'Benzina');
+INSERT INTO inserzioni  VALUES ('P00006', 'Descrizione inserzione priv 6', 'Diesel');
+INSERT INTO inserzioni  VALUES ('P00007', 'Descrizione inserzione priv 7', 'Moto');
+INSERT INTO inserzioni  VALUES ('P00008', 'Descrizione inserzione priv 8', 'Benzina');
+INSERT INTO inserzioni  VALUES ('P00009', 'Descrizione inserzione priv 9', 'Diesel');
+INSERT INTO inserzioni  VALUES ('P00010', 'Descrizione inserzione priv 10', 'Case');
+
+INSERT INTO aziende 
+VALUES ('000001','Azienda1','Referente1','3333333333','00100', 10000);
+INSERT INTO aziende 
+VALUES ('000002','Azienda2','Referente2','3333333344','00010', 11000);
+INSERT INTO aziende 
+VALUES ('000003','Azienda3','Referente3','3333333355','00001', 11100);
+
+INSERT INTO privati VALUES ('PPP001', 'Rossi', 'Michele', 'Via Roma 1', '00100', 'michele.rossi@email.com');
+INSERT INTO privati VALUES ('PPP002', 'Bianchi', 'Laura', 'Via Bari 2', '00010', 'laura.bianchi@email.com');
+INSERT INTO privati VALUES ('PPP003', 'Verdi', 'Giuseppe', 'Via Lecce 3', '00001', 'giuseppe.verdi@email.com');
+
+INSERT INTO insaz 
+VALUES ('000001','I00001');
+INSERT INTO insaz 
+VALUES ('000001','I00002');
+INSERT INTO insaz 
+VALUES ('000001','I00003');
+INSERT INTO insaz 
+VALUES ('000002','I00004');
+INSERT INTO insaz 
+VALUES ('000002','I00005');
+INSERT INTO insaz 
+VALUES ('000002','I00006');
+INSERT INTO insaz 
+VALUES ('000003','I00007');
+INSERT INTO insaz 
+VALUES ('000003','I00008');
+INSERT INTO insaz 
+VALUES ('000003','I00009');
+INSERT INTO insaz 
+VALUES ('000003','I00010');
+
+
+INSERT INTO inspriv  VALUES ('PPP001','P00001');
+INSERT INTO inspriv  VALUES ('PPP001','P00002');
+INSERT INTO inspriv  VALUES ('PPP001','P00003');
+INSERT INTO inspriv  VALUES ('PPP002','P00004');
+INSERT INTO inspriv  VALUES ('PPP002','P00005');
+INSERT INTO inspriv  VALUES ('PPP002','P00006');
+INSERT INTO inspriv  VALUES ('PPP003','P00007');
+INSERT INTO inspriv  VALUES ('PPP003','P00008');
+INSERT INTO inspriv  VALUES ('PPP003','P00009');
+INSERT INTO inspriv  VALUES ('PPP003','P00010');
+
+-- Ho preferito creare altre 10 diverse inserzioni solo per i privati invece di usare le stesse, per ordine mio personale.
+ SELECT * FROM inserzioni;
+ SELECT * FROM privati;
+ SELECT * FROM aziende;
+ SELECT * FROM insaz;
+ SELECT * FROM inspriv;
+SELECT * FROM citta;
+SELECT * FROM redattori;
+SELECT * FROM redazRedat;
+SELECT * FROM categorie;
+SELECT * FROM testate;
+SELECT * FROM redazioni; -- da aggiornare il CAP dato che risulta NULL /OPPURE NOME DELLA CITTA'.
