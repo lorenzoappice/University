@@ -142,11 +142,10 @@ provincia char(2)
 */
 -- ho avuto difficoltà a capire questo punto della traccia perchè non sapevo se dover cancellare le colonne provincia e citta e lasciare CAP come chiave esterna
 -- oppure se creare una nuova colonna idcitta che fa da chiave esterna a CAP in tabella citta. Ho optato per la prima soluzione.
+
 -- REDAZIONI
 ALTER TABLE redazioni
-RENAME COLUMN citta TO CAP;
-ALTER TABLE redazioni
-MODIFY COLUMN CAP char(5);
+DROP COLUMN citta;
 
 ALTER TABLE redazioni
 ADD COLUMN CAP char(5) AFTER nomeComitato;
@@ -154,6 +153,7 @@ ADD COLUMN CAP char(5) AFTER nomeComitato;
 ALTER TABLE redazioni
 ADD FOREIGN KEY (CAP)
 REFERENCES citta (CAP);
+
 -- REDATTORI
 ALTER TABLE redattori
 DROP COLUMN citta,
@@ -181,25 +181,33 @@ ALTER TABLE privati
 ADD FOREIGN KEY (CAP)
 REFERENCES citta (CAP);
 
-/* inserire nel database tanti comitati di redazioni quante sono le testate di giornale inserite;
-modificare la tabella categorie in modo che la chiave primaria sia idCategoria anziché nomeCategoria;
-inserire le categorie e ognuna con un diverso numero di sottocategorie (es. affitti e vendite sono sottocategorie di case);
-inserire nelle tabelle almeno 10 inserzioni di privati e 10 inserzioni di aziende;
-verificare che i dati siano stati inseriti correttamente, in particolare fare interrogazioni semplici (scrivendo SELECT * FROM nomeTabella;) sulle tabelle in cui inserite i dati non appena avete finito l'inserimento;
-*/
+
 INSERT INTO citta
-VALUES ('00100','Roma','RM'); 
+VALUES ('70125','Roma','RM'); 
 INSERT INTO citta
 VALUES ('00010','Bari','BA');
 INSERT INTO citta
-VALUES ('00001','Lecce','LE');
+VALUES ('70126','Lecce','LE');
+/* qui vado ad aggiornare la tabella redazioni il campo CAP sennò risulterà NOT NULL
+   dato che l'inserimento è stato fatto prima */
+   
+UPDATE redazioni
+SET CAP = '70125'
+WHERE idRedazione = 'abc1';
+UPDATE redazioni
+SET CAP = '00010'
+WHERE idRedazione = 'abc2';
+UPDATE redazioni
+SET CAP = '70126'
+WHERE idRedazione = 'abc3';
+
 
 INSERT INTO redattori 
-VALUES ('001','Rossi','Mario','Via Roma','00100','mariorossi@gmail.com');
+VALUES ('001','Rossi','Mario','Via Roma','70125','amariorossi@gmail.com');
 INSERT INTO redattori 
 VALUES ('002','Bianchi','Mario','Via Bari','00010','mariobianchi@gmail.com');
 INSERT INTO redattori 
-VALUES ('003','Gialli','Luca','Via Lecce','00001','gialliluca@gmail.com');
+VALUES ('003','Gialli','Luca','Via Lecce','70126','giallilucagmail.com');
 
 INSERT INTO redazRedat
 VALUES ('abc1','001');
@@ -234,45 +242,45 @@ VALUES ('Benzina','Moto');
 INSERT INTO categorie
 VALUES ('Diesel','Moto');
 -- inserizioni per aziende
-INSERT INTO inserzioni  VALUES ('I00001', 'Descrizione inserzione azienda 1', 'Case');
+INSERT INTO inserzioni  VALUES ('I70126', 'Descrizione inserzione casaz 1', 'Case');
 INSERT INTO inserzioni  VALUES ('I00002', 'Descrizione inserzione azienda 2', 'Affitti');
 INSERT INTO inserzioni  VALUES ('I00003', 'Descrizione inserzione azienda 3', 'Vendite');
-INSERT INTO inserzioni  VALUES ('I00004', 'Descrizione inserzione azienda 4', 'Moto');
+INSERT INTO inserzioni  VALUES ('I00004', 'Descrizione inserzione  azienda 4 modic', 'Moto');
 INSERT INTO inserzioni  VALUES ('I00005', 'Descrizione inserzione azienda 5', 'Benzina');
-INSERT INTO inserzioni  VALUES ('I00006', 'Descrizione inserzione azienda 6', 'Diesel');
-INSERT INTO inserzioni  VALUES ('I00007', 'Descrizione inserzione azienda 7', 'Moto');
+INSERT INTO inserzioni  VALUES ('I00006', 'Descrizione modic inserzione azienda 6', 'Diesel');
+INSERT INTO inserzioni  VALUES ('I00007', 'Descrizione inserzione vend azienda 7', 'Moto');
 INSERT INTO inserzioni  VALUES ('I00008', 'Descrizione inserzione azienda 8', 'Benzina');
 INSERT INTO inserzioni  VALUES ('I00009', 'Descrizione inserzione azienda 9', 'Diesel');
-INSERT INTO inserzioni  VALUES ('I00010', 'Descrizione inserzione azienda 10', 'Case');
+INSERT INTO inserzioni  VALUES ('I00010', 'Descrizione inserzione casaz 10 vendo', 'Case');
 -- inserizioni per i privati
-INSERT INTO inserzioni  VALUES ('P00001', 'Descrizione inserzione priv 1', 'Case');
+INSERT INTO inserzioni  VALUES ('P70126', 'Descrizione vend inserzione casap 1', 'Case');
 INSERT INTO inserzioni  VALUES ('P00002', 'Descrizione inserzione priv 2', 'Affitti');
 INSERT INTO inserzioni  VALUES ('P00003', 'Descrizione inserzione priv 3', 'Vendite');
-INSERT INTO inserzioni  VALUES ('P00004', 'Descrizione inserzione priv 4', 'Moto');
+INSERT INTO inserzioni  VALUES ('P00004', 'Descrizione vend  inserzione modic  priv 4', 'Moto');
 INSERT INTO inserzioni  VALUES ('P00005', 'Descrizione inserzione priv 5', 'Benzina');
 INSERT INTO inserzioni  VALUES ('P00006', 'Descrizione inserzione priv 6', 'Diesel');
 INSERT INTO inserzioni  VALUES ('P00007', 'Descrizione inserzione priv 7', 'Moto');
 INSERT INTO inserzioni  VALUES ('P00008', 'Descrizione inserzione priv 8', 'Benzina');
 INSERT INTO inserzioni  VALUES ('P00009', 'Descrizione inserzione priv 9', 'Diesel');
-INSERT INTO inserzioni  VALUES ('P00010', 'Descrizione inserzione priv 10', 'Case');
+INSERT INTO inserzioni  VALUES ('P00010', 'Descrizione inserzione casap 10', 'Case');
 
 INSERT INTO aziende 
-VALUES ('000001','Azienda1','Referente1','3333333333','00100', 10000);
+VALUES ('070126','Azienda1','Referente1','3335563333','70125', 10000);
 INSERT INTO aziende 
 VALUES ('000002','Azienda2','Referente2','3333333344','00010', 11000);
 INSERT INTO aziende 
-VALUES ('000003','Azienda3','Referente3','3333333355','00001', 11100);
+VALUES ('000003','Azienda3','Referente3','5563333355','70126', 19000000);
 
-INSERT INTO privati VALUES ('PPP001', 'Rossi', 'Michele', 'Via Roma 1', '00100', 'michele.rossi@email.com');
-INSERT INTO privati VALUES ('PPP002', 'Bianchi', 'Laura', 'Via Bari 2', '00010', 'laura.bianchi@email.com');
-INSERT INTO privati VALUES ('PPP003', 'Verdi', 'Giuseppe', 'Via Lecce 3', '00001', 'giuseppe.verdi@email.com');
+INSERT INTO privati VALUES ('PPP001', 'Prossi', 'Michaur', 'Via Roma 1', '70125', 'michele.rossi@email.com');
+INSERT INTO privati VALUES ('PPP002', 'Bianchi', 'Laura', 'Via Bari 2', '00010', 'alaura.bianchi@email.com');
+INSERT INTO privati VALUES ('PPP003', 'Verdi', 'Giuseppe', 'Via Lecce 3', '70126', 'giuseppe.verdi@email.com');
 
 INSERT INTO insaz 
-VALUES ('000001','I00001');
+VALUES ('070126','I70126');
 INSERT INTO insaz 
-VALUES ('000001','I00002');
+VALUES ('070126','I00002');
 INSERT INTO insaz 
-VALUES ('000001','I00003');
+VALUES ('070126','I00003');
 INSERT INTO insaz 
 VALUES ('000002','I00004');
 INSERT INTO insaz 
@@ -289,7 +297,7 @@ INSERT INTO insaz
 VALUES ('000003','I00010');
 
 
-INSERT INTO inspriv  VALUES ('PPP001','P00001');
+INSERT INTO inspriv  VALUES ('PPP001','P70126');
 INSERT INTO inspriv  VALUES ('PPP001','P00002');
 INSERT INTO inspriv  VALUES ('PPP001','P00003');
 INSERT INTO inspriv  VALUES ('PPP002','P00004');
@@ -312,3 +320,191 @@ SELECT * FROM redazRedat;
 SELECT * FROM categorie;
 SELECT * FROM testate;
 SELECT * FROM redazioni; -- da aggiornare il CAP dato che risulta NULL /OPPURE NOME DELLA CITTA'.
+
+ALTER TABLE testate ADD FOREIGN KEY (redazione)
+REFERENCES redazioni (idRedazione) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/* ALTER TABLE inspriv ADD FOREIGN KEY (idInserzione)
+REFERENCES inserzioni (codice) ON DELETE NOT NULL ON UPDATE NOT NULL; 
+   Questo non è possibile farlo dato che una chiave primaria non può avere valore null 
+   di conseguenza ho commentato la query che ho usato.
+*/ 
+
+SELECT nome FROM testate;
+SELECT * FROM redattori;
+SELECT cognome, nome FROM redattori;
+SELECT cognome, nome , email FROM redattori;
+SELECT * FROM redattori WHERE email LIKE 'a%';  
+SELECT * FROM redattori WHERE email LIKE '%@%';
+SELECT * FROM redattori WHERE email NOT LIKE '%@%';
+SELECT nomeComitato, indirizzoWeb FROM redazioni WHERE indirizzoWeb IS NOT NULL;
+SELECT testo, codice FROM inserzioni  WHERE categoria = 'Case';
+SELECT codice,testo FROM inserzioni WHERE testo LIKE '%casa%';
+SELECT codice,testo FROM inserzioni WHERE testo LIKE '%casa%' AND testo LIKE '%vend%';
+SELECT codice,testo FROM inserzioni WHERE testo LIKE '%modic%';
+SELECT * FROM privati;
+SELECT * FROM privati WHERE CAP = '70125' OR CAP = '70126';
+SELECT * FROM aziende WHERE telefono LIKE '%556%';
+
+
+/* in questo esercizio ho avuto difficoltà nel punto dove dovessi modificare le tabelle con l'attributo città 
+   E anche al punto dove bisognava modificare la tabella categoria  con idCategoria perchè non avevo capito la traccia 
+   Spero che sia corretto come l'ho interpretata. 
+   Non ho fatto errori di sintassi, sono dovuto andare a rivedere la parte del CASCADE dato che non me lo ricordavo.*/
+
+-- da 21 a 38 esercitazione 3
+SELECT nomeAzienda FROM aziende;
+ALTER TABLE aziende ADD COLUMN annoFondazione int AFTER nomeAzienda;
+UPDATE aziende SET annoFondazione = 1979
+WHERE idAzienda = '070126';
+UPDATE aziende SET annoFondazione = 1998
+WHERE idAzienda = '000002';
+UPDATE aziende SET annoFondazione = 1999
+WHERE idAzienda = '000003';
+
+
+
+SELECT nomeAzienda FROM aziende WHERE annoFondazione < 1980;
+SELECT nomeAzienda FROM aziende WHERE annoFondazione > 1998;
+SELECT nomeAzienda FROM aziende WHERE annoFondazione BETWEEN 1980 AND 1998;
+ALTER TABLE privati ADD COLUMN civico int AFTER via;
+UPDATE privati SET civico = 21
+WHERE idPrivato = 'PPP001';
+UPDATE privati SET civico = 22
+WHERE idPrivato = 'PPP002';
+UPDATE privati SET civico = 13
+WHERE idPrivato = 'PPP003';
+ALTER TABLE privati ADD COLUMN eta int AFTER nome;
+UPDATE privati SET eta = 29
+WHERE idPrivato = 'PPP001';
+UPDATE privati SET eta = 31
+WHERE idPrivato = 'PPP002';
+UPDATE privati SET eta = 32
+WHERE idPrivato = 'PPP003';
+INSERT INTO privati VALUES ('PPP004', 'Rossi', 'Michele',22 ,'Via Lecce 3',18, '70126', 'Rossi.Michele@email.com');
+INSERT INTO privati VALUES ('PPP005', 'Gialli', 'Arnold',22 ,'Via Lecce 3',18, '70126', 'Gialli.Arnold@email.com');
+
+SELECT idPrivato,cognome,nome,eta,via,civico,CAP,email FROM privati;
+SELECT nome,cognome,civico FROM privati WHERE civico > 20;
+SELECT nome,cognome,civico FROM privati WHERE civico BETWEEN 10 AND 15;
+SELECT nome,cognome,via,civico,CAP as Codice_Avviamento_Postale FROM privati WHERE civico BETWEEN 15 AND 30;
+SELECT nomeAzienda,CapitaleSociale,CapitaleSociale/2 as Plafond_max_disponibile FROM aziende;
+SELECT eta,nome FROM privati WHERE eta < 30;
+SELECT nomeComitato FROM redazioni WHERE nomeComitato LIKE "%m%t%"; -- non ho nomecomitato senza m e t come sotto stringa quindi mi da tutti e 3 i comitati.
+CREATE TABLE PrivatiGiovani AS SELECT * FROM privati WHERE eta <30; -- ho un avuto dei dubbi su fare queste due query e ho lasciato cosi confrontandomi con i compagni di corso.
+-- INSERT INTO PrivatiGiovani Select * FROM privati WHERE eta < 30;
+
+
+UPDATE PrivatiGiovani SET cognome = "Rossi" WHERE cognome LIKE "P%";
+UPDATE PrivatiGiovani SET nome = "Arnold" WHERE nome LIKE "%aur%";
+
+SELECT cognome,nome as NICK,eta FROM privati WHERE nome = "Arnold";  
+SELECT CONCAT(cognome,nome) as Pilota, eta FROM privati WHERE cognome = "Rossi";
+SELECT * FROM aziende WHERE telefono LIKE "080%"; -- non ho aziende con telefono che inizia con 000 quindi non mi da nessun azienda con questa SELECT.
+
+/* PrivatiGiovani non dovrebbe contenere i vincoli di integrità interrelazionali mi è rimasto questo dubbio alla riga 393 ,
+ oltre questo ho riscontrato un problema col CONCAT.(perchè non ricordavo come si facesse),l'ho risolto.
+     */
+
+-- Esercitazione numero 4
+ALTER TABLE aziende ADD COLUMN civico int AFTER CAP;  -- Mi sono accorto che mancavano i civici nelle aziende leggendo il primo punto alla traccia
+UPDATE aziende SET civico = 21
+WHERE idAzienda = '070126';
+UPDATE aziende SET civico = 22
+WHERE idAzienda = '000002';
+UPDATE aziende SET civico = 13
+WHERE idAzienda = '000003';
+
+SELECT nomeAzienda,civico FROM aziende WHERE civico > 15;
+SELECT nomeAzienda,annoFondazione FROM aziende WHERE annoFondazione < 1980;
+SELECT nomeAzienda FROM aziende WHERE annoFondazione BETWEEN 1980 AND 1998;
+SELECT codice,testo,categoria FROM inserzioni;
+SELECT * FROM insaz;
+-- CROSS JOIN PER PRODOTTO CARTESIANO
+SELECT idInserzione,nomeAzienda,referente,telefono 
+FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda; 
+
+SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
+FROM inserzioni CROSS JOIN aziende CROSS JOIN insaz 
+WHERE inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
+
+SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
+
+SELECT * FROM privati;
+
+SELECT DISTINCT nome FROM privati; -- qui ho capito che dovessi farlo solo sui nomi dei privati e non anche degli altri.
+
+-- NATURAL JOIN 
+SELECT idInserzione,nomeAzienda,referente,telefono 
+FROM insaz NATURAL JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda; 
+
+SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
+FROM inserzioni NATURAL JOIN aziende NATURAL JOIN insaz 
+WHERE inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
+
+SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
+-- JOIN ESPLICITO
+
+SELECT idInserzione,nomeAzienda,referente,telefono 
+FROM aziende JOIN insaz ON aziende.idAzienda = insaz.idAzienda;
+
+SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
+FROM inserzioni  JOIN aziende  JOIN insaz 
+ON inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
+
+SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
+ON pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+
+SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
+FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
+WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
+
+ -- PRIMA CRESC E POI UN ALTRA DECRESC
+SELECT idInserzione,nomeAzienda,referente,telefono 
+FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY telefono ASC;
+SELECT idInserzione,nomeAzienda,referente,telefono 
+FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY telefono DESC;
+
+SELECT aziende.*, citta.CAP FROM aziende JOIN citta ON aziende.CAP = citta.CAP;  /*  Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
+ Ho preferito mettere solo il nomeAzienda per le aziende e non tutte le colonne. */
+
+SELECT aziende.*, citta.citta, citta.CAP, citta.provincia FROM aziende JOIN citta ON aziende.CAP = citta.CAP; /*  Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
+Ho preferito mettere solo il nomeAzienda per le aziende e non tutte le colonne. */
+
+SELECT privati.*,citta.CAP FROM privati JOIN citta ON privati.CAP = citta.CAP;  -- Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
+
+
+SELECT privati.*, citta.* FROM privati JOIN citta ON privati.CAP = citta.CAP; -- Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
+
+
+SELECT citta.CAP,citta.citta AS NomeCitta, aziende.nomeAzienda AS NomeAzienda,privati.nome AS NomePrivato,privati.cognome AS CognomePrivato FROM citta
+JOIN aziende ON citta.CAP = aziende.CAP
+JOIN privati ON citta.CAP = privati.CAP;   /* NON SONO RIUSCITO A NON FAR VISUALIZZARE I DUPLICATI , HO PROVATO CON DISTINCT MA NON HA FUNZIONATO.
+                                              FORSE PERCHE' IL NUMERO DI PRIVATI E' MAGGIORE DELLE CITTA E AZIENDE. */
+
+SELECT privati.*,inspriv.idInserzione FROM privati JOIN inspriv ON privati.idPrivato = inspriv.idPrivato WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
