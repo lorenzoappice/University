@@ -420,91 +420,48 @@ SELECT nomeAzienda,annoFondazione FROM aziende WHERE annoFondazione < 1980;
 SELECT nomeAzienda FROM aziende WHERE annoFondazione BETWEEN 1980 AND 1998;
 SELECT codice,testo,categoria FROM inserzioni;
 SELECT * FROM insaz;
--- CROSS JOIN PER PRODOTTO CARTESIANO
-SELECT idInserzione,nomeAzienda,referente,telefono 
-FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda; 
+-- PRODOTTO CARTESIANO  (ho dovuto modificare la consegna da qui perchè il prodotto cartesiano l'avevo fatto utilizzando il cross join, il quale è molto simile ma non era richiesto nell'esercizio, me ne sono accorto solo dopo)
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz,aziende WHERE insaz.idAzienda = aziende.idAzienda; 
+SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni,aziende,insaz WHERE insaz.idAzienda = aziende.idAzienda AND insaz.idInserzione = inserzioni.codice;
+SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice AND elenco_aziende.capitaleSociale > 18000000;
+SELECT nome FROM privati;
+-- è stata modificata anche questo perchè nella consegna prima della modifica non prendevo tutti i nomi , ho risolto in questo modo.
+SELECT DISTINCT nome FROM redattori UNION
+SELECT DISTINCT nome FROM privati UNION
+SELECT DISTINCT nomeAzienda AS nome FROM aziende UNION
+SELECT DISTINCT nomeComitato AS nome FROM redazioni UNION
+SELECT DISTINCT nome FROM testate UNION
+SELECT DISTINCT idCategoria AS nome FROM categorie;
 
-SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
-FROM inserzioni CROSS JOIN aziende CROSS JOIN insaz 
-WHERE inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
+-- Da 45-48 col NATURAL JOIN (anche questo ho dovuto modificare perchè avevo usato in moodo sbagliato il NATURAL JOIN)
 
-SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz NATURAL JOIN aziende;
+SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni NATURAL JOIN aziende NATURAL JOIN insaz WHERE insaz.idInserzione = inserzioni.codice;
+SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni as pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE IA.idInserzione = pubblicazioni.codice;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE IA.idInserzione = pubblicazioni.codice;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE elenco_aziende.capitaleSociale > 18000000 AND IA.idInserzione = pubblicazioni.codice;
 
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
+-- Da 45-48 col JOIN (anche questo ho dovuto modificare perchè avevo usato in moodo sbagliato il JOIN)
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz JOIN aziende ON insaz.idAzienda = aziende.idAzienda;
+SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni JOIN aziende  JOIN insaz ON insaz.idInserzione = inserzioni.codice AND insaz.idAzienda = aziende.idAzienda;
+SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni as pubblicazioni JOIN aziende AS elenco_aziende JOIN insaz AS IA ON IA.idInserzione = pubblicazioni.codice AND IA.idAzienda = elenco_aziende.idAzienda;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni JOIN aziende AS elenco_aziende  JOIN insaz AS IA ON IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni JOIN aziende AS elenco_aziende JOIN insaz AS IA ON elenco_aziende.capitaleSociale > 18000000 AND IA.idInserzione = pubblicazioni.codice;
 
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni CROSS JOIN aziende AS elenco_aziende CROSS JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz,aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY aziende.telefono ASC; 
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz,aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY aziende.telefono DESC;
 
-SELECT * FROM privati;
+SELECT aziende.*,citta.CAP FROM aziende,citta WHERE aziende.CAP = citta.CAP;
 
-SELECT DISTINCT nome FROM privati; -- qui ho capito che dovessi farlo solo sui nomi dei privati e non anche degli altri.
+SELECT aziende.*,citta.citta FROM aziende, citta WHERE aziende.CAP = citta.CAP;
+SELECT privati.*,citta.CAP FROM privati,citta WHERE privati.CAP = citta.CAP;
 
--- NATURAL JOIN 
-SELECT idInserzione,nomeAzienda,referente,telefono 
-FROM insaz NATURAL JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda; 
+SELECT privati.*,citta.* FROM privati,citta WHERE privati.CAP = citta.CAP;
+-- visualizzare l'elenco delle città e per ogni città, nome dell'azienda che ha sede nella città,
+--  nome e cognome dei privati che risiedono nella città (fare attenzione a non visualizzare due volte le stesse informazioni);
+    
 
-SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
-FROM inserzioni NATURAL JOIN aziende NATURAL JOIN insaz 
-WHERE inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
-
-SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
-
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
-
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
--- JOIN ESPLICITO
-
-SELECT idInserzione,nomeAzienda,referente,telefono 
-FROM aziende JOIN insaz ON aziende.idAzienda = insaz.idAzienda;
-
-SELECT codice,testo,categoria, nomeAzienda,referente,telefono 
-FROM inserzioni  JOIN aziende  JOIN insaz 
-ON inserzioni.codice = insaz.idInserzione AND aziende.idAzienda = insaz.idAzienda;
-
-SELECT codice,testo,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
-ON pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
-
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda;
-
-SELECT codice AS codice_articolo,testo AS descrizione ,categoria,nomeAzienda,referente,telefono 
-FROM inserzioni AS pubblicazioni  JOIN aziende AS elenco_aziende  JOIN insaz AS IA 
-WHERE pubblicazioni.codice = IA.idInserzione AND elenco_aziende.idAzienda = IA.idAzienda AND elenco_aziende.CapitaleSociale > 18000000;
-
- -- PRIMA CRESC E POI UN ALTRA DECRESC
-SELECT idInserzione,nomeAzienda,referente,telefono 
-FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY telefono ASC;
-SELECT idInserzione,nomeAzienda,referente,telefono 
-FROM insaz CROSS JOIN aziende WHERE insaz.idAzienda = aziende.idAzienda ORDER BY telefono DESC;
-
-SELECT aziende.*, citta.CAP FROM aziende JOIN citta ON aziende.CAP = citta.CAP;  /*  Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
- Ho preferito mettere solo il nomeAzienda per le aziende e non tutte le colonne. */
-
-SELECT aziende.*, citta.citta, citta.CAP, citta.provincia FROM aziende JOIN citta ON aziende.CAP = citta.CAP; /*  Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
-Ho preferito mettere solo il nomeAzienda per le aziende e non tutte le colonne. */
-
-SELECT privati.*,citta.CAP FROM privati JOIN citta ON privati.CAP = citta.CAP;  -- Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
-
-
-SELECT privati.*, citta.* FROM privati JOIN citta ON privati.CAP = citta.CAP; -- Ho usato il join perchè sto combinando informazioni da due tab diverse per la condizione CAP
-
-
-SELECT citta.CAP,citta.citta AS NomeCitta, aziende.nomeAzienda AS NomeAzienda,privati.nome AS NomePrivato,privati.cognome AS CognomePrivato FROM citta
-JOIN aziende ON citta.CAP = aziende.CAP
-JOIN privati ON citta.CAP = privati.CAP;   /* NON SONO RIUSCITO A NON FAR VISUALIZZARE I DUPLICATI , HO PROVATO CON DISTINCT MA NON HA FUNZIONATO.
-                                              FORSE PERCHE' IL NUMERO DI PRIVATI E' MAGGIORE DELLE CITTA E AZIENDE. */
-
-SELECT privati.*,inspriv.idInserzione FROM privati JOIN inspriv ON privati.idPrivato = inspriv.idPrivato WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
+-- visualizzare i privati che hanno un cognome iniziante con la lettera P oppure con la lettera A, indicando i codici delle inserzioni che questi hanno fatto
+SELECT privati.nome,privati.cognome,privati.idPrivato,inspriv.idInserzione FROM privati  NATURAL JOIN inspriv WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
