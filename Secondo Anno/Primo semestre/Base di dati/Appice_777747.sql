@@ -48,6 +48,7 @@ FOREIGN KEY (categoriaPadre)
 REFERENCES categorie (nomeCategoria)
 );
 
+
 CREATE TABLE inserzioni (
 codice char(6) PRIMARY KEY,
 testo text,
@@ -464,4 +465,97 @@ SELECT privati.*,citta.* FROM privati,citta WHERE privati.CAP = citta.CAP;
     
 
 -- visualizzare i privati che hanno un cognome iniziante con la lettera P oppure con la lettera A, indicando i codici delle inserzioni che questi hanno fatto
-SELECT privati.nome,privati.cognome,privati.idPrivato,inspriv.idInserzione FROM privati  NATURAL JOIN inspriv WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
+SELECT privati.nome,privati.cognome,privati.idPrivato,inspriv.idInserzione FROM privati  NATURAL JOIN inspriv
+WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
+-- non sono riuscito a far visualizzare l'elenco senza far ripetere le informazioni due volte (il commento che si trova qui sopra), proverò a modificarlo in seguito
+-- per il resto invece ho segnato tutte le modifiche fatte dalla vecchia consegna dell'esercitazione num 4 
+-- probabilmente attuerò l'aggiunta della query che non sono riuscito a fare nella esercitazione 5.!!!
+
+-- Esercitazione 5
+
+SELECT privati.idPrivato, privati.cognome, privati.nome, inspriv.idInserzione, inserzioni.categoria
+FROM privati JOIN inspriv JOIN inserzioni ON privati.idPrivato = inspriv.idPrivato AND inspriv.idInserzione = inserzioni.codice
+WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
+
+SELECT privati.idPrivato, privati.cognome, privati.nome, inspriv.idInserzione, inserzioni.testo, inserzioni.categoria
+FROM privati JOIN inspriv JOIN inserzioni ON privati.idPrivato = inspriv.idPrivato AND inspriv.idInserzione = inserzioni.codice
+WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
+
+-- visualizzare il nome dei privati e il nome delle testate in cui i privati hanno pubblicato delle inserzioni;
+-- mi sono accorto che non è stato inserito nulla in instest, procedo ora a compilare la tabella
+INSERT INTO instest  VALUES ('I00002', 'abc2');
+INSERT INTO instest  VALUES ('I00003', 'abc3');
+INSERT INTO instest  VALUES ('I00004', 'abc1');
+INSERT INTO instest  VALUES ('I00005', 'abc1');
+INSERT INTO instest  VALUES ('I00006', 'abc1');
+INSERT INTO instest  VALUES ('I00007', 'abc2');
+INSERT INTO instest  VALUES ('I00008', 'abc2');
+INSERT INTO instest  VALUES ('I00009', 'abc2');
+INSERT INTO instest  VALUES ('I00010', 'abc3');
+INSERT INTO instest  VALUES ('I70126', 'abc3');
+INSERT INTO instest  VALUES ('P00002', 'abc2');
+INSERT INTO instest  VALUES ('P00003', 'abc3');
+INSERT INTO instest  VALUES ('P00004', 'abc1');
+INSERT INTO instest  VALUES ('P00005', 'abc1');
+INSERT INTO instest  VALUES ('P00006', 'abc1');
+INSERT INTO instest  VALUES ('P00007', 'abc2');
+INSERT INTO instest  VALUES ('P00008', 'abc2');
+INSERT INTO instest  VALUES ('P00009', 'abc2');
+INSERT INTO instest  VALUES ('P00010', 'abc3');
+INSERT INTO instest  VALUES ('P70126', 'abc3');
+
+
+
+SELECT privati.nome, privati.cognome, testate.nome AS nome_testata FROM privati
+JOIN inspriv JOIN instest JOIN testate ON privati.idPrivato = inspriv.idPrivato AND  inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata;
+
+
+-- da ricontrollar
+SELECT privati.nome,testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato FROM privati
+JOIN inspriv JOIN instest JOIN testate JOIN redazioni ON privati.idPrivato = inspriv.idPrivato AND inspriv.idInserzione = instest.idInserzione
+AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione;
+
+-- da ricontrollare
+/* indicando anche i nomi di tutti i redattori presenti nelle testate giornalistiche; */
+SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
+FROM privati
+JOIN inspriv ON privati.idPrivato = inspriv.idPrivato
+JOIN instest ON inspriv.idInserzione = instest.idInserzione
+JOIN testate ON instest.idTestata = testate.idTestata
+JOIN redazioni ON testate.redazione = redazioni.idRedazione
+JOIN redazRedat ON redazioni.idRedazione = redazRedat.idRedazione
+JOIN redattori ON redazRedat.idRedattori = redattori.idRedattori
+GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
+
+-- da rivedere 64-65-66
+ SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
+FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
+ AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione AND redazioni.idRedazione = redazRedat.idRedazione
+ AND redazRedat.idRedattori = redattori.idRedattori WHERE privati.cognome LIKE 'p%' OR privati.cognome LIKE 'a%'
+GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
+
+
+SELECT inserzioni.testo, categorie.categoriaPadre AS Nome_Categoria FROM inserzioni JOIN categorie ON inserzioni.categoria = categorie.idCategoria;
+SELECT COUNT(*) AS Numero_inserzioni FROM inserzioni JOIN categorie ON inserzioni.categoria = categorie.idCategoria; -- mi sono dovuto informare per poter fare questa query, ho trovato il COUNT(*)
+
+ALTER TABLE insaz ADD COLUMN costo int;
+-- Inserire il costo delle inserzioni nella tabella insAz, variabile tra 30 e 50 euro;
+UPDATE insaz SET costo = 30 WHERE idInserzione = 'I70126';
+UPDATE insaz SET costo = 42 WHERE idInserzione = 'I00002';
+UPDATE insaz SET costo = 48 WHERE idInserzione = 'I00003';
+UPDATE insaz SET costo = 30 WHERE idInserzione = 'I00004';
+UPDATE insaz SET costo = 36 WHERE idInserzione = 'I00005';
+UPDATE insaz SET costo = 39 WHERE idInserzione = 'I00006';
+UPDATE insaz SET costo = 35 WHERE idInserzione = 'I00007';
+UPDATE insaz SET costo = 49 WHERE idInserzione = 'I00008';
+UPDATE insaz SET costo = 44 WHERE idInserzione = 'I00009';
+UPDATE insaz SET costo = 37 WHERE idInserzione = 'I00010';
+
+-- 71 DA RIVEDERE 
+-- Visualizzare la spesa totale sostenuta dall'azienda con codice 'COM000' per pubblicare le inserzioni;
+SELECT insaz.costo AS spesa_totale FROM insaz NATURAL JOIN aziende  WHERE idAzienda = 'I70126'; -- non avevo codici come 'COM000' allora ne ho messo uno casuale
+-- Visualizzare tutte le informazioni sulle inserzioni pubblicate;
+SELECT * FROM insaz;
+-- DA RIVEDERE
+-- Visualizzare il numero totale delle inserzioni pubblicate;
+SELECT COUNT(*) AS Numero_inserzioni FROM insaz;
