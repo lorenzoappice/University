@@ -422,30 +422,23 @@ SELECT nomeAzienda FROM aziende WHERE annoFondazione BETWEEN 1980 AND 1998;
 SELECT codice,testo,categoria FROM inserzioni;
 SELECT * FROM insaz;
 -- PRODOTTO CARTESIANO  (ho dovuto modificare la consegna da qui perchè il prodotto cartesiano l'avevo fatto utilizzando il cross join, il quale è molto simile ma non era richiesto nell'esercizio, me ne sono accorto solo dopo)
-SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz,aziende WHERE insaz.idAzienda = aziende.idAzienda; 
-SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni,aziende,insaz WHERE insaz.idAzienda = aziende.idAzienda AND insaz.idInserzione = inserzioni.codice;
-SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
-SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
-SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice AND elenco_aziende.capitaleSociale > 18000000;
+SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz,aziende; 
+SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni,aziende,insaz;
+SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA;
+SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni,aziende AS elenco_aziende,insaz AS IA WHERE elenco_aziende.capitaleSociale > 18000000;
 SELECT nome FROM privati;
--- è stata modificata anche questo perchè nella consegna prima della modifica non prendevo tutti i nomi , ho risolto in questo modo.
-SELECT DISTINCT nome FROM redattori UNION
-SELECT DISTINCT nome FROM privati UNION
-SELECT DISTINCT nomeAzienda AS nome FROM aziende UNION
-SELECT DISTINCT nomeComitato AS nome FROM redazioni UNION
-SELECT DISTINCT nome FROM testate UNION
-SELECT DISTINCT idCategoria AS nome FROM categorie;
+
+-- è stata modificata anche questo perchè nella consegna prima nella modifica prendevo tutti i nomi distinti di tutto il database , invece ora solo quelli distinti di privati.
+SELECT DISTINCT nome FROM redattori;
 
 -- Da 45-48 col NATURAL JOIN (anche questo ho dovuto modificare perchè avevo usato in moodo sbagliato il NATURAL JOIN)
-
-SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz NATURAL JOIN aziende;
 SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni NATURAL JOIN aziende NATURAL JOIN insaz WHERE insaz.idInserzione = inserzioni.codice;
 SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni as pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE IA.idInserzione = pubblicazioni.codice;
 SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE IA.idInserzione = pubblicazioni.codice;
 SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni NATURAL JOIN aziende AS elenco_aziende NATURAL JOIN insaz AS IA WHERE elenco_aziende.capitaleSociale > 18000000 AND IA.idInserzione = pubblicazioni.codice;
 
 -- Da 45-48 col JOIN (anche questo ho dovuto modificare perchè avevo usato in moodo sbagliato il JOIN)
-SELECT insaz.idInserzione,aziende.nomeAzienda,aziende.referente,aziende.telefono FROM insaz JOIN aziende ON insaz.idAzienda = aziende.idAzienda;
 SELECT inserzioni.codice,inserzioni.testo,inserzioni.categoria, aziende.nomeAzienda,aziende.referente,aziende.telefono FROM inserzioni JOIN aziende  JOIN insaz ON insaz.idInserzione = inserzioni.codice AND insaz.idAzienda = aziende.idAzienda;
 SELECT pubblicazioni.codice,pubblicazioni.testo,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni as pubblicazioni JOIN aziende AS elenco_aziende JOIN insaz AS IA ON IA.idInserzione = pubblicazioni.codice AND IA.idAzienda = elenco_aziende.idAzienda;
 SELECT pubblicazioni.codice AS codice_articolo,pubblicazioni.testo AS descrzione,pubblicazioni.categoria, elenco_aziende.nomeAzienda,elenco_aziende.referente,elenco_aziende.telefono FROM inserzioni AS pubblicazioni JOIN aziende AS elenco_aziende  JOIN insaz AS IA ON IA.idAzienda = elenco_aziende.idAzienda AND IA.idInserzione = pubblicazioni.codice;
@@ -460,16 +453,17 @@ SELECT aziende.*,citta.citta FROM aziende, citta WHERE aziende.CAP = citta.CAP;
 SELECT privati.*,citta.CAP FROM privati,citta WHERE privati.CAP = citta.CAP;
 
 SELECT privati.*,citta.* FROM privati,citta WHERE privati.CAP = citta.CAP;
--- visualizzare l'elenco delle città e per ogni città, nome dell'azienda che ha sede nella città,
---  nome e cognome dei privati che risiedono nella città (fare attenzione a non visualizzare due volte le stesse informazioni);
-    
 
--- visualizzare i privati che hanno un cognome iniziante con la lettera P oppure con la lettera A, indicando i codici delle inserzioni che questi hanno fatto
-SELECT privati.nome,privati.cognome,privati.idPrivato,inspriv.idInserzione FROM privati  NATURAL JOIN inspriv
+-- 59
+SELECT citta.*, aziende.nomeAzienda, privati.nome,privati.cognome FROM citta,aziende,privati WHERE aziende.CAP = citta.CAP AND privati.CAP = citta.CAP;
+-- non posso evitare di stampare più volte le stesse informazioni perchè il numero degli elementi per colonna sono diversi, Es: ho 5 privati e 3 città e 3 nomi di aziende,
+-- per cui il nome delle aziende e delle città si ripetono per ogni privato.
+
+
+SELECT DISTINCT privati.nome,privati.cognome,privati.idPrivato,inspriv.idInserzione FROM privati  NATURAL JOIN inspriv
 WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
--- non sono riuscito a far visualizzare l'elenco senza far ripetere le informazioni due volte (il commento che si trova qui sopra), proverò a modificarlo in seguito
--- per il resto invece ho segnato tutte le modifiche fatte dalla vecchia consegna dell'esercitazione num 4 
--- probabilmente attuerò l'aggiunta della query che non sono riuscito a fare nella esercitazione 5.!!!
+-- non sono riuscito a far visualizzare l'elenco senza far ripetere le informazioni due volte (il commento che si trova qui sopra),
+-- per il resto invece ho segnato tutte le modifiche fatte dalla vecchia consegna dell'esercitazione num 4 .
 
 -- Esercitazione 5
 
@@ -481,8 +475,7 @@ SELECT privati.idPrivato, privati.cognome, privati.nome, inspriv.idInserzione, i
 FROM privati JOIN inspriv JOIN inserzioni ON privati.idPrivato = inspriv.idPrivato AND inspriv.idInserzione = inserzioni.codice
 WHERE privati.cognome LIKE 'P%' OR privati.cognome LIKE 'A%';
 
--- visualizzare il nome dei privati e il nome delle testate in cui i privati hanno pubblicato delle inserzioni;
--- mi sono accorto che non è stato inserito nulla in instest, procedo ora a compilare la tabella
+-- mi sono accorto che non è stato inserito nulla in instest, procedo ora a compilare la tabella, dato che mi servirà
 INSERT INTO instest  VALUES ('I00002', 'abc2');
 INSERT INTO instest  VALUES ('I00003', 'abc3');
 INSERT INTO instest  VALUES ('I00004', 'abc1');
@@ -504,42 +497,36 @@ INSERT INTO instest  VALUES ('P00009', 'abc2');
 INSERT INTO instest  VALUES ('P00010', 'abc3');
 INSERT INTO instest  VALUES ('P70126', 'abc3');
 
-
-
-SELECT privati.nome, privati.cognome, testate.nome AS nome_testata FROM privati
+SELECT DISTINCT privati.nome, testate.nome AS nome_testata FROM privati
 JOIN inspriv JOIN instest JOIN testate ON privati.idPrivato = inspriv.idPrivato AND  inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata;
+-- inserito il distinct perchè mi ripeteva i nomi delle persone e di conseguenza le testate.
 
-
--- da ricontrollar
-SELECT privati.nome,testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato FROM privati
+SELECT DISTINCT privati.nome,testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato FROM privati
 JOIN inspriv JOIN instest JOIN testate JOIN redazioni ON privati.idPrivato = inspriv.idPrivato AND inspriv.idInserzione = instest.idInserzione
-AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione;
+AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione;     
+-- inserito il distinct perchè mi ripeteva i nomi delle persone e di conseguenza le testate.
 
--- da ricontrollare
+
+-- 65 da ricontrollare
 /* indicando anche i nomi di tutti i redattori presenti nelle testate giornalistiche; */
-SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
-FROM privati
-JOIN inspriv ON privati.idPrivato = inspriv.idPrivato
-JOIN instest ON inspriv.idInserzione = instest.idInserzione
-JOIN testate ON instest.idTestata = testate.idTestata
-JOIN redazioni ON testate.redazione = redazioni.idRedazione
-JOIN redazRedat ON redazioni.idRedazione = redazRedat.idRedazione
-JOIN redattori ON redazRedat.idRedattori = redattori.idRedattori
+SELECT  privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
+FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
+ AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione
+ AND redazioni.idRedazione = redazRedat.idRedazione  AND redazRedat.idRedattori = redattori.idRedattori
 GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
-
--- da rivedere 64-65-66
+-- da rivedere 66
  SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
 FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
- AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione AND redazioni.idRedazione = redazRedat.idRedazione
+AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione AND redazioni.idRedazione = redazRedat.idRedazione
  AND redazRedat.idRedattori = redattori.idRedattori WHERE privati.cognome LIKE 'p%' OR privati.cognome LIKE 'a%'
 GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
 
 
-SELECT inserzioni.testo, categorie.categoriaPadre AS Nome_Categoria FROM inserzioni JOIN categorie ON inserzioni.categoria = categorie.idCategoria;
+SELECT inserzioni.testo, categorie.categoriaPadre AS Nome_Categoria FROM inserzioni JOIN categorie ON inserzioni.categoria = categorie.idCategoria; -- nell'on potevo anche usare categorie.categoriaPadre
 SELECT COUNT(*) AS Numero_inserzioni FROM inserzioni JOIN categorie ON inserzioni.categoria = categorie.idCategoria; -- mi sono dovuto informare per poter fare questa query, ho trovato il COUNT(*)
 
 ALTER TABLE insaz ADD COLUMN costo int;
--- Inserire il costo delle inserzioni nella tabella insAz, variabile tra 30 e 50 euro;
+
 UPDATE insaz SET costo = 30 WHERE idInserzione = 'I70126';
 UPDATE insaz SET costo = 42 WHERE idInserzione = 'I00002';
 UPDATE insaz SET costo = 48 WHERE idInserzione = 'I00003';
@@ -551,11 +538,45 @@ UPDATE insaz SET costo = 49 WHERE idInserzione = 'I00008';
 UPDATE insaz SET costo = 44 WHERE idInserzione = 'I00009';
 UPDATE insaz SET costo = 37 WHERE idInserzione = 'I00010';
 
--- 71 DA RIVEDERE 
 -- Visualizzare la spesa totale sostenuta dall'azienda con codice 'COM000' per pubblicare le inserzioni;
-SELECT insaz.costo AS spesa_totale FROM insaz NATURAL JOIN aziende  WHERE idAzienda = 'I70126'; -- non avevo codici come 'COM000' allora ne ho messo uno casuale
--- Visualizzare tutte le informazioni sulle inserzioni pubblicate;
-SELECT * FROM insaz;
--- DA RIVEDERE
--- Visualizzare il numero totale delle inserzioni pubblicate;
-SELECT COUNT(*) AS Numero_inserzioni FROM insaz;
+SELECT SUM(costo) AS SpesaTotale FROM insaz WHERE idAzienda = '000003'; -- non avevo codici come 'COM000' allora ne ho messo uno casuale
+SELECT * FROM inserzioni;
+SELECT COUNT(*) AS Numero_inserzioni FROM inserzioni;
+
+
+SELECT * FROM inserzioni WHERE testo LIKE '%affa%'; -- vuoto non ho questa sottostringa
+SELECT COUNT(*) AS Numero_inserzioni FROM inserzioni WHERE testo LIKE '%affa%';
+
+SELECT idInserzione, costo FROM insaz UNION
+SELECT idInserzione, NULL AS costo FROM inspriv
+ORDER BY idInserzione;
+SELECT COUNT(*) AS Numero_inserzioni FROM insaz UNION
+SELECT COUNT(*) AS Numero_inserzioni FROM inspriv;
+
+
+
+
+
+-- controllo da qui in poi
+SELECT (SELECT COUNT(*) FROM inspriv) AS NumeroInserzioniPrivati, (SELECT COUNT(*) FROM insaz) AS NumeroInserzioniAziende;
+
+SELECT (SELECT COUNT(*) FROM inserzioni WHERE categoria = 'Case') AS NumeroInserzioniCase, 
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Moto') AS NumeroInserzioniMoto,
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Affitti') AS NumeroInserzioniAffitti,
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Vendite') AS NumeroInserzioniVendite,
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Benzina') AS NumeroInserzioniBenzina,
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Diesel') AS NumeroInserzioniDiesel;   -- bisogna aumentare la grandezza di visualizzazione del prompt per vedere tutto correttamente, i dati però sono corretti.
+
+
+/*
+-- Visualizzare le inserzioni che appartengono a più di una categoria.
+SELECT (SELECT codice FROM inserzioni WHERE categoria = 'Case') AS NumeroInserzioniCase,
+(SELECT codice FROM inserzioni WHERE categoria = 'Moto') AS NumeroInserzioniCase,
+(SELECT codice FROM inserzioni WHERE categoria = 'Affitti') AS NumeroInserzioniCase,
+(SELECT codice FROM inserzioni WHERE categoria = 'Vendite') AS NumeroInserzioniCase,
+(SELECT codice FROM inserzioni WHERE categoria = 'Benzina') AS NumeroInserzioniCase,
+(SELECT codice FROM inserzioni WHERE categoria = 'Diesel') AS NumeroInserzioniCase;  
+
+ vuoto perchè non ci sono inserzioni che appartengono a più di una categoria!
+*/
+
