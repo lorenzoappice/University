@@ -509,11 +509,12 @@ AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRe
 
 -- 65 da ricontrollare
 /* indicando anche i nomi di tutti i redattori presenti nelle testate giornalistiche; */
-SELECT  privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
+SELECT  privati.nome AS nome_privati, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
 FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
  AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione
  AND redazioni.idRedazione = redazRedat.idRedazione  AND redazRedat.idRedattori = redattori.idRedattori
 GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
+
 -- da rivedere 66
  SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
 FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
@@ -553,11 +554,6 @@ ORDER BY idInserzione;
 SELECT COUNT(*) AS Numero_inserzioni FROM insaz UNION
 SELECT COUNT(*) AS Numero_inserzioni FROM inspriv;
 
-
-
-
-
--- controllo da qui in poi
 SELECT (SELECT COUNT(*) FROM inspriv) AS NumeroInserzioniPrivati, (SELECT COUNT(*) FROM insaz) AS NumeroInserzioniAziende;
 
 SELECT (SELECT COUNT(*) FROM inserzioni WHERE categoria = 'Case') AS NumeroInserzioniCase, 
@@ -565,18 +561,90 @@ SELECT (SELECT COUNT(*) FROM inserzioni WHERE categoria = 'Case') AS NumeroInser
 (SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Affitti') AS NumeroInserzioniAffitti,
 (SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Vendite') AS NumeroInserzioniVendite,
 (SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Benzina') AS NumeroInserzioniBenzina,
-(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Diesel') AS NumeroInserzioniDiesel;   -- bisogna aumentare la grandezza di visualizzazione del prompt per vedere tutto correttamente, i dati però sono corretti.
+(SELECT COUNT(*) FROM inserzioni WHERE categoria  = 'Diesel') AS NumeroInserzioniDiesel;   -- bisogna aumentare la grandezza di visualizzazione del prompt per vedere tutto correttamente, i dati sono corretti.
 
+
+-- Visualizzare le inserzioni che appartengono a più di una categoria.
+SELECT codice, testo, COUNT(DISTINCT categoria) AS num_categorie
+FROM inserzioni
+GROUP BY codice, testo
+HAVING num_categorie > 1;
+ -- vuoto perchè non ci sono inserzioni che appartengono a più di una categoria!
+
+-- ESERCITAZIONE 6
+
+
+SELECT categorie.idCategoria, COUNT(*) AS numero_inserzioni FROM categorie JOIN inserzioni 
+ON categorie.idCategoria = inserzioni.categoria GROUP BY categorie.idCategoria;
+
+SELECT idTestata, COUNT(*) AS numero_inserzioni FROM instest
+GROUP BY idTestata;
+
+SELECT idInserzione, COUNT(*) AS numero_testate FROM instest 
+GROUP BY idInserzione;
+
+
+
+SELECT inserzioni.codice AS codice_inserzione_azienda, aziende.nomeAzienda, aziende.idAzienda,insaz.costo AS costo_inserzione
+FROM inserzioni NATURAL JOIN insaz NATURAL JOIN aziende WHERE inserzioni.codice = insaz.idInserzione AND insaz.costo < 35;
+
+
+SELECT COUNT(*) AS Numero_inserzioni FROM inserzioni 
+NATURAL JOIN insaz NATURAL JOIN aziende WHERE inserzioni.codice = insaz.idInserzione AND insaz.costo < 35;
+
+SELECT citta.citta, COUNT(*) AS Numero_Privati FROM privati NATURAL JOIN citta 
+WHERE NOT citta = 'Roma' GROUP BY citta.citta; --Ho messo roma perchè non avevo putignano nelle città
+
+
+SELECT privati.nome, citta.citta FROM privati NATURAL JOIN citta
+ WHERE citta = 'Lecce' ORDER BY privati.nome; 
+ -- cambiato da bari in lecce perchè in bari ho solo una persona mentre in lecce 3 quindi posso verificare l'ordine corretto.
+
+SELECT GROUP_CONCAT(nome) AS nomi, SUM(eta)/COUNT(eta) AS eta_media FROM privati;
+
+
+SELECT nome, eta FROM privati WHERE eta = (SELECT MAX(eta) FROM privati); 
+-- mi sono aiutato per questa, dato che l'altro metodo commentato qui sotto non mi piaceva,
+-- Altro modo che avrei usato è : SELECT nome, eta FROM privati ORDER BY eta DESC LIMIT 1;
+
+
+SELECT * FROM insaz ORDER BY costo ASC , idInserzione DESC;
+SELECT * FROM insaz ORDER BY costo DESC , idInserzione DESC;
+
+SELECT codice, testo AS Descrizione FROM inserzioni;
+
+SELECT inserzioni.codice AS codice_inserzione, aziende.idAzienda FROM inserzioni JOIN insaz JOIN aziende 
+ON inserzioni.codice = insaz.idInserzione AND insaz.idAzienda = aziende.idAzienda ;
+
+-- 94
+SELECT inserzioni.codice AS codice_inserzione, aziende.idAzienda , redattori.nome AS nome_referente 
+FROM redattori JOIN redazRedat ON redattori.idRedattori = redazRedat.idRedattori
+JOIN redazioni ON redazRedat.idRedazione = redazioni.idRedazione 
+JOIN instest ON redazioni.idRedazione = instest.idTestata 
+JOIN inserzioni ON instest.idInserzione = inserzioni.codice
+JOIN insaz ON inserzioni.codice = insaz.idInserzione
+JOIN aziende ON insaz.idAzienda = aziende.idAzienda;
+
+--95
+SELECT inserzioni.codice AS codice_inserzione, aziende.idAzienda , redattori.nome AS nome_referente, citta.citta AS citta_azienda  
+FROM redattori JOIN redazRedat ON redattori.idRedattori = redazRedat.idRedattori
+JOIN redazioni ON redazRedat.idRedazione = redazioni.idRedazione 
+JOIN instest ON redazioni.idRedazione = instest.idTestata 
+JOIN inserzioni ON instest.idInserzione = inserzioni.codice
+JOIN insaz ON inserzioni.codice = insaz.idInserzione
+JOIN aziende ON insaz.idAzienda = aziende.idAzienda
+JOIN citta ON aziende.CAP = citta.CAP;
+
+
+SELECT inserzioni.codice AS codice_inserzione, privati.idPrivato FROM inserzioni JOIN inspriv JOIN privati 
+ON inserzioni.codice = inspriv.idInserzione AND inspriv.idPrivato = privati.idPrivato;
+
+SELECT inserzioni.codice AS codice_inserzione,privati.nome, privati.idPrivato FROM inserzioni JOIN inspriv JOIN privati 
+ON inserzioni.codice = inspriv.idInserzione AND inspriv.idPrivato = privati.idPrivato;
 
 /*
--- Visualizzare le inserzioni che appartengono a più di una categoria.
-SELECT (SELECT codice FROM inserzioni WHERE categoria = 'Case') AS NumeroInserzioniCase,
-(SELECT codice FROM inserzioni WHERE categoria = 'Moto') AS NumeroInserzioniCase,
-(SELECT codice FROM inserzioni WHERE categoria = 'Affitti') AS NumeroInserzioniCase,
-(SELECT codice FROM inserzioni WHERE categoria = 'Vendite') AS NumeroInserzioniCase,
-(SELECT codice FROM inserzioni WHERE categoria = 'Benzina') AS NumeroInserzioniCase,
-(SELECT codice FROM inserzioni WHERE categoria = 'Diesel') AS NumeroInserzioniCase;  
-
- vuoto perchè non ci sono inserzioni che appartengono a più di una categoria!
+Visualizzare il numero di inserzioni delle aziende che hanno pubblicato nella testata con numero di inserzioni maggiore, 
+mostrando anche il nome della testata.
 */
+
 
