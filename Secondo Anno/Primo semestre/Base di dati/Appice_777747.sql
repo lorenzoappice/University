@@ -507,15 +507,13 @@ AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRe
 -- inserito il distinct perchè mi ripeteva i nomi delle persone e di conseguenza le testate.
 
 
--- 65 da ricontrollare
-/* indicando anche i nomi di tutti i redattori presenti nelle testate giornalistiche; */
+
 SELECT  privati.nome AS nome_privati, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
 FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
  AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione
  AND redazioni.idRedazione = redazRedat.idRedazione  AND redazRedat.idRedattori = redattori.idRedattori
 GROUP BY privati.nome, testate.nome, redazioni.nomeComitato;
 
--- da rivedere 66
  SELECT privati.nome, testate.nome AS nome_testate, redazioni.nomeComitato AS nome_comitato, GROUP_CONCAT(redattori.nome) AS redattori_testata
 FROM privati JOIN inspriv JOIN instest JOIN testate JOIN redazioni JOIN redazRedat JOIN redattori ON privati.idPrivato = inspriv.idPrivato
 AND inspriv.idInserzione = instest.idInserzione AND instest.idTestata = testate.idTestata AND testate.redazione = redazioni.idRedazione AND redazioni.idRedazione = redazRedat.idRedazione
@@ -641,10 +639,13 @@ ON inserzioni.codice = inspriv.idInserzione AND inspriv.idPrivato = privati.idPr
 
 SELECT inserzioni.codice AS codice_inserzione,privati.nome, privati.idPrivato FROM inserzioni JOIN inspriv JOIN privati 
 ON inserzioni.codice = inspriv.idInserzione AND inspriv.idPrivato = privati.idPrivato;
-
 /*
 Visualizzare il numero di inserzioni delle aziende che hanno pubblicato nella testata con numero di inserzioni maggiore, 
 mostrando anche il nome della testata.
+c'è una testata con più inserzioni delle altre, conta le inserzioni delle aziende che hanno pubblicato su questa testata
 */
 
-
+SELECT COUNT(insaz.idInserzione) AS numero_inserzioni ,testate.nome FROM testate JOIN instest JOIN insaz JOIN aziende 
+ON testate.idTestata = instest.idTestata AND instest.idInserzione = insaz.idInserzione
+AND insaz.idAzienda = aziende.idAzienda
+WHERE testate.idTestata = (SELECT idTestata FROM instest GROUP BY idTestata ORDER BY COUNT(idInserzione) DESC LIMIT 1) GROUP BY testate.nome;
