@@ -2,7 +2,7 @@
 using namespace std;
 int main() {
     // prima parte
-   /* list<char> Lista1;
+    list<char> Lista1;
     list<char> Lista2;
     Lista1.inserisciInTesta('A');
     Lista2.inserisciInTesta('A');
@@ -53,7 +53,7 @@ int main() {
     l2.inserisciInTesta(2);
 
     l1.toglicomune(l2);
-    l1.stampaLista();*/
+    l1.stampaLista();
     // insertionSort di una lista
     list<int> lsort;
     lsort.inserisciInTesta(3);
