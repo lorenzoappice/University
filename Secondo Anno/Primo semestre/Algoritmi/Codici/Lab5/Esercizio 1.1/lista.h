@@ -19,6 +19,23 @@ private:
 public:
     // Costruttore
     Lista() : testa(nullptr) {}
+    bool listavuota() const {
+        return testa == nullptr;
+    }
+    tipoelem Leggilista(int posizione, Lista<T> lista) {
+        Nodo<T>* corrente = testa;
+        int i = 0;
+        while (corrente != nullptr && i < posizione) {
+            corrente = corrente->successivo;
+            i++;
+        }
+        if (corrente != nullptr) {
+            return corrente->dato;
+        }
+        return 0;
+    }
+
+
 
     // Metodo per inserire un elemento in testa alla lista
     void inserisciInTesta(T valore) {

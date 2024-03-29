@@ -1,0 +1,35 @@
+whatis: ci dice cosa fa un comando.
+es: whatis vim, whaits cat, whatis grep
+
+which: dice dove si trova un certo eseguibile etc..
+
+
+creare file e cartelle con riga di comando : mkdir (make dir)
+es: mkdir esercitazione1 esercitazione2 esercitazione3
+
+il blu signicica che è una cartella, il bianco invece è un file
+
+cd.. : si torna indietro
+touch crea il file nel percorso dove ci troviamo
+rm -d nomefile: elimina il file 
+rm -rd nomecartella : per le cartelle
+ls vede il percorso 
+
+
+mv può spostare e rinominare:
+mv prova.txt pippo.txt 
+mv --help
+mv
+
+cp è per copiare 
+cp -r esercitazione esercitazione1 copia tutto ciò che sta nella cartella
+
+
+nano un altro editor di testo , l'altro è vlm 
+
+
+
+
+$ diff : file, lo modifichi e salvi con un altro nome, questo comando produce in output informazioni testuali su quali sono linee aggiunte(precedute da +) e quali rimosse(precedute dal -) , modificate corrisponde da lineaa rimossa e aggiunta.
+
+$ patch : 
